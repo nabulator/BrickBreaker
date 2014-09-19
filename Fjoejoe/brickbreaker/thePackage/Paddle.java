@@ -3,17 +3,25 @@ package thePackage;
 import processing.core.PApplet;
 
 /**
- * Ball bounces off paddle
+ * A paddle that draws itself and moves left and right
  * @author 60129
  *
  */
-public class Paddle {
+public abstract class Paddle 
+{
 	
-	public Paddle ( PApplet parent, boolean isHuman )
+	/**
+	 * Creates a paddle
+	 * @param parent the PApplet parent
+	 */
+	public Paddle ( PApplet parent )
 	{
 		
 	}
 	
+	/**
+	 * 
+	 */
 	public void onEnter ()
 	{
 		

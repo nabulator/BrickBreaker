@@ -1,10 +1,21 @@
 package thePackage;
 
+import processing.core.PApplet;
+
 /**
- * A brick
+ * Displays a brick and disappears when hit
  * @author 60129
  *
  */
-public class Brick {
-
+public class Brick 
+{
+	/**
+	 * Creates a brick
+	 * @param parent PApplet parent
+	 */
+	public Brick(PApplet parent)
+	{
+		
+	}
+	
 }
