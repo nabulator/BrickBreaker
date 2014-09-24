@@ -7,7 +7,7 @@ import processing.core.PApplet;
  * @author 60129
  *
  */
-public abstract class Paddle 
+public abstract class Paddle extends Sprite
 {
 	
 	/**
@@ -16,15 +16,7 @@ public abstract class Paddle
 	 */
 	public Paddle ( PApplet parent )
 	{
-		
-	}
-	
-	/**
-	 * 
-	 */
-	public void onEnter ()
-	{
-		
+		super(parent, 0.0f, 0.0f);
 	}
 	
 	

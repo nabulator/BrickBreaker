@@ -7,7 +7,7 @@ import processing.core.PApplet;
  * @author 60129
  *
  */
-public class Wall 
+public class Wall extends Sprite
 {
 	/**
 	 * Creates a wall
@@ -15,7 +15,14 @@ public class Wall
 	 */
 	public Wall(PApplet parent)
 	{
-		
+		super(parent, 0.0f, 0.0f);
 	}
 	
+	/**
+	 * Draws the wall
+	 */
+	public void draw()
+	{
+		
+	}
 }

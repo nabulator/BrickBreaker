@@ -11,7 +11,7 @@ public class UIPaddle extends Paddle
 {
 	/**
 	 * Creates a user-inputed paddle
-	 * @param parent
+	 * @param parent PApplet parent
 	 */
 	public UIPaddle(PApplet parent) 
 	{

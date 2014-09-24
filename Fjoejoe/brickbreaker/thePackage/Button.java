@@ -7,7 +7,7 @@ import processing.core.PApplet;
  * @author 60129
  *
  */
-public class Button 
+public class Button extends Sprite
 {
 	/**
 	 * Creates a button
@@ -15,7 +15,7 @@ public class Button
 	 */
 	public Button(PApplet parent)
 	{
-		
+		super(parent, 0.0f, 0.0f);
 	}
 	
 	

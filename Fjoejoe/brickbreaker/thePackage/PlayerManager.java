@@ -20,7 +20,6 @@ public class PlayerManager
 		
 	}
 	
-	
 	/**
 	 * Returns a list of bricks in the game
 	 * @return List of bricks
@@ -30,4 +29,11 @@ public class PlayerManager
 		return null;
 	}
 	
+	/**
+	 * Constructs a brick onto the game
+	 */
+	public void createBrick()
+	{
+		
+	}
 }

@@ -27,4 +27,12 @@ public class GameManager
 	{
 		
 	}
+	
+	/**
+	 * Creates a button to return to main menu when game is over
+	 */
+	public void draw()
+	{
+		
+	}
 }
