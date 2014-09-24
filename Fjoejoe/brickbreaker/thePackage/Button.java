@@ -7,16 +7,34 @@ import processing.core.PApplet;
  * @author 60129
  *
  */
-public class Button extends Sprite
+public class Button
 {
 	/**
 	 * Creates a button
 	 * @param parent PApplet parent
+	 * @param xinit - the initial x-coordinate of the center of button
+	 * @param yinit - the intiial y-coordinate of the center of the button
 	 */
-	public Button(PApplet parent)
+	public Button (PApplet parent, float xinit, float yinit)
 	{
-		super(parent, 0.0f, 0.0f);
+		
+	}
+
+	/**
+	 * draws the button
+	 * @param parent a reference to PApplet
+	 */
+	public void draw (PApplet parent)
+	{
+		
 	}
 	
-	
+	/**
+	 * Checks if the mouseclick is over the button
+	 * @return true if btn successfully clicked
+	 */
+	public boolean isClicked ()
+	{
+		return false;
+	}
 }

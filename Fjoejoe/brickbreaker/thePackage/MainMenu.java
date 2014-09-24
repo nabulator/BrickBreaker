@@ -8,8 +8,15 @@ import processing.core.PApplet;
  * @author 60129
  *
  */
-public class MainMenu extends PApplet
+public class MainMenu
 {
+	/**
+	 * Initializes the main menu
+	 */
+	public MainMenu()
+	{
+		
+	}
 	
 	/**
 	 * Draws the main menu
@@ -18,4 +25,6 @@ public class MainMenu extends PApplet
 	{
 		
 	}
+	
+	
 }

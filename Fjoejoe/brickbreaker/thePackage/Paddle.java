@@ -7,18 +7,26 @@ import processing.core.PApplet;
  * @author 60129
  *
  */
-public abstract class Paddle extends Sprite
+public abstract class Paddle
 {
 	
 	/**
 	 * Creates a paddle
-	 * @param parent the PApplet parent
+	 * @param xinit - the initial x-coordinate of the center of paddle
+	 * @param yinit - the intiial y-coordinate of the center of the paddle
 	 */
-	public Paddle ( PApplet parent )
+	public Paddle (float xinit, float yinit)
 	{
-		super(parent, 0.0f, 0.0f);
+		
 	}
 	
-	
+	/**
+	 * Update the position of the paddle
+	 * @param parent a reference to the paddle
+	 */
+	public void draw(PApplet parent)
+	{
+		
+	}
 
 }

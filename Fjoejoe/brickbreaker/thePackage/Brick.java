@@ -7,30 +7,32 @@ import processing.core.PApplet;
  * @author 60129
  *
  */
-public class Brick extends Sprite
+public class Brick
 {
 	/**
 	 * Creates a brick
-	 * @param parent PApplet parent
+	 * @param xinit - the initial x-coordinate of the center of brick
+	 * @param yinit - the initial y-coordinate of the center of brick
 	 */
-	public Brick(PApplet parent)
+	public Brick(float x, float yinit)
 	{
-		super(parent, 0.0f, 0.0f);
+		
 	}
 	
 	/**
 	 * Causes damage to brick
+	 * Brick may disappear if health is 0
 	 */
-	public void isHit ()
+	public void isHit()
 	{
 		
 	}
 	
 	/**
 	 * Draws the brick
-	 * Handles collision testing
+	 * @param parent PApplet parent
 	 */
-	public void draw()
+	public void draw(PApplet parent)
 	{
 		
 	}

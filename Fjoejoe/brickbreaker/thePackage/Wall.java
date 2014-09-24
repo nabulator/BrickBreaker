@@ -7,21 +7,30 @@ import processing.core.PApplet;
  * @author 60129
  *
  */
-public class Wall extends Sprite
+public class Wall
 {
 	/**
 	 * Creates a wall
-	 * @param parent PApplet parent
 	 */
-	public Wall(PApplet parent)
+	public Wall()
 	{
-		super(parent, 0.0f, 0.0f);
+		
 	}
 	
 	/**
 	 * Draws the wall
+	 * @param parent a reference to PApplet
 	 */
-	public void draw()
+	public void draw(PApplet parent)
+	{
+		
+	}
+	
+	/**
+	 * Moves wall down
+	 * @param brickLayers the degree it moves down
+	 */
+	public void moveDown( int brickLayers )
 	{
 		
 	}

@@ -11,13 +11,28 @@ public class UIPaddle extends Paddle
 {
 	/**
 	 * Creates a user-inputed paddle
-	 * @param parent PApplet parent
+	 * @param xinit - the initial x-coordinate of the center of paddle
+	 * @param yinit - the initial y-coordinate of the center of the paddle
 	 */
-	public UIPaddle(PApplet parent) 
+	public UIPaddle(float x, float y) 
 	{
-		super(parent);
+		super( x, y );
+	}
+
+	/**
+	 * It moves the paddle to the left.
+	 */
+	public void pushLeft ()
+	{
+		
 	}
 	
+	/**
+	 * Moves the paddle slightly to the right
+	 */
+	public void pushRight()
+	{
+		
+	}
 	
-
 }
