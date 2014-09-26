@@ -10,14 +10,26 @@ import processing.core.PApplet;
  */
 public class PlayerManager 
 {
+	private PApplet parent;
+	private Paddle paddle;
+	private Ball ball;
+	private Brick[] bricks;
+	
 	/**
 	 * Creates a player that takes input by either UI or AI
 	 * @param parent the PApplet parent
 	 * @param playerType the type of player
 	 */
-	public PlayerManager(PApplet parent, String playerType)
+	public PlayerManager(PApplet parent, String playerType, int playerNum)
 	{
+		this.parent = parent;
+		if(playerType.equals("AI"))
+			paddle = new AIPaddle(playerNum * 25, playerNum * 25);
+		else if(playerType.equals("UI"))
+			paddle = new AIPaddle(playerNum * 25, playerNum * 25);
 		
+		
+			
 	}
 	
 	/**
@@ -26,7 +38,7 @@ public class PlayerManager
 	 */
 	public Brick[] getBricks()
 	{
-		return null;
+		return bricks;
 	}
 	
 	/**
@@ -34,6 +46,7 @@ public class PlayerManager
 	 */
 	public void createBrick()
 	{
+		
 		
 	}
 }
