@@ -31,7 +31,7 @@ public class Button
 	
 	/**
 	 * Checks if the mouseclick is over the button
-	 * @return true if btn successfully clicked
+	 * @return true if button successfully clicked
 	 */
 	public boolean isClicked ()
 	{
