@@ -9,14 +9,17 @@ import processing.core.PApplet;
  */
 public class Brick
 {
+	private float x, y;
+	
 	/**
 	 * Creates a brick
 	 * @param xinit - the initial x-coordinate of the center of brick
 	 * @param yinit - the initial y-coordinate of the center of brick
 	 */
-	public Brick(float x, float yinit)
+	public Brick(float xinit, float yinit)
 	{
-		
+		this.x = xinit;
+		this.y = yinit;
 	}
 	
 	/**
@@ -34,7 +37,7 @@ public class Brick
 	 */
 	public void draw(PApplet parent)
 	{
-		
+		parent.rect(x, y, 25, 15);
 	}
 	
 }

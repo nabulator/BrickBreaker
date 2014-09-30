@@ -4,22 +4,18 @@ import processing.core.PApplet;
 
 public class BrickBreaker extends PApplet 
 {
-
-	/**
-	 * Initiates the game and contains the main method
-	 * @param args called to init game
-	 */
-	public static void main(String[] args) 
-	{
-		
-	}
+	private MainMenu mm;
+	private GameManager gm;
 	
 	/**
 	 * Setup the game
 	 */
 	public void setup()
 	{
+		size(960, 680);
+		//this.ellipse(23, 24, 14, 14);
 		
+		gm = new GameManager(this, null);
 	}
 	
 	/**
@@ -27,7 +23,8 @@ public class BrickBreaker extends PApplet
 	 */
 	public void draw()
 	{
-		
+		clear();
+		gm.draw();
 	}
 
 	/**

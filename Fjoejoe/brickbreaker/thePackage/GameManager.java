@@ -1,5 +1,7 @@
 package thePackage;
 
+import java.awt.Rectangle;
+
 import processing.core.PApplet;
 
 /**
@@ -9,6 +11,10 @@ import processing.core.PApplet;
  */
 public class GameManager 
 {
+	private PApplet parent;
+	private PlayerManager p1, p2;
+	private Rectangle p1Bounds, p2Bounds;
+	
 	/**
 	 * Creates a game manager based on the game mode
 	 * @param parent the PApplet parent
@@ -16,7 +22,13 @@ public class GameManager
 	 */
 	public GameManager(PApplet parent, String gameMode)
 	{
+		this.parent = parent;
 		
+		p1Bounds = new Rectangle(10, 10, 400, 200);
+		p2Bounds = new Rectangle(410, 10, 400, 200);
+		
+		p1 = new PlayerManager(parent, null, p1Bounds);
+		p2 = new PlayerManager(parent, null, p2Bounds);
 	}
 	
 	/**
@@ -33,6 +45,12 @@ public class GameManager
 	 */
 	public void draw()
 	{
+		parent.rect(p1Bounds.x, p1Bounds.y, p1Bounds.width, p1Bounds.height);
+		parent.rect(p2Bounds.x, p2Bounds.y, p2Bounds.width, p2Bounds.height);
+		
+		p1.draw();
+		p2.draw();
+		
 		
 	}
 }
