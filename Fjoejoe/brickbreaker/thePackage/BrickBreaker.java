@@ -32,7 +32,17 @@ public class BrickBreaker extends PApplet
 	 */
 	public void keyPressed()
 	{
-		
+		if( this.key == this.CODED )
+		{
+			if(this.keyCode == this.RIGHT)
+			{
+				
+			}
+			else if (this.keyCode == this.LEFT)
+			{
+				
+			}
+		}
 	}
 	
 	/**

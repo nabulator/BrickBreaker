@@ -33,6 +33,9 @@ public class PlayerManager
 		else if(playerType.equals("UI"))
 			paddle = new AIPaddle(playerNum * 25, playerNum * 25);
 		*/
+		//temp for paddle init
+		this.paddle = new UIPaddle(boundary.x + boundary.x/2 , boundary.y + boundary.height - Paddle.height);
+		
 		this.boundary = boundary;
 		this.ball = new Ball(boundary.x, boundary.y, null, null, null, boundary);
 		
@@ -70,6 +73,11 @@ public class PlayerManager
 			b.draw(parent);
 		
 		ball.draw(parent);
-		
+		paddle.draw(parent);
+	}
+	
+	public Paddle getPaddle()
+	{
+		return this.paddle;
 	}
 }

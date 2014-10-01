@@ -22,7 +22,7 @@ public class UIPaddle extends Paddle
 	/**
 	 * It moves the paddle to the left.
 	 */
-	public void pushLeft ()
+	public void pushLeft (PApplet parent)
 	{
 		
 	}

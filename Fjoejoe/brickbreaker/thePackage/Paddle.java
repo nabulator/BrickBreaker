@@ -10,6 +10,9 @@ import processing.core.PApplet;
 public abstract class Paddle
 {
 	
+	private float x, y;
+	public static final int height = 20, width = 60;
+	
 	/**
 	 * Creates a paddle
 	 * @param xinit - the initial x-coordinate of the center of paddle
@@ -17,7 +20,8 @@ public abstract class Paddle
 	 */
 	public Paddle (float xinit, float yinit)
 	{
-		
+		x = xinit;
+		y = yinit;
 	}
 	
 	/**
@@ -26,7 +30,9 @@ public abstract class Paddle
 	 */
 	public void draw(PApplet parent)
 	{
-		
+		parent.fill( parent.color(255, 0, 0) );
+		parent.rect(x, y, width, height);
+		parent.fill( parent.color(255) );
 	}
 
 }

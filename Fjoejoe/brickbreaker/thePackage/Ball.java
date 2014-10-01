@@ -11,6 +11,7 @@ import processing.core.PApplet;
  */
 public class Ball
 {
+	public static final float RADIUS = 10;
 	private float x, y;
 	private float dx, dy;
 	private Rectangle boundary;
@@ -26,8 +27,8 @@ public class Ball
 	 */
 	public Ball(float x, float y, Brick[] bricks, Paddle paddle, Wall wall, Rectangle dimensions)
 	{
-		this.x = x;
-		this.y = y;
+		this.x = x + RADIUS;
+		this.y = y + RADIUS;
 		boundary = dimensions;
 		dx = 3;
 		dy = 2;
@@ -55,13 +56,13 @@ public class Ball
 	 */
 	public void draw(PApplet parent)
 	{
-		parent.ellipse(x, y, 20, 20);
+		parent.ellipse(x, y, RADIUS*2, RADIUS*2);
 		x += dx;
 		y += dy;
 		
-		if(x < boundary.x || x > boundary.x + boundary.width)
+		if( x < boundary.x + RADIUS || x > boundary.x + boundary.width - RADIUS)
 			dx *= -1;
-		if( y < boundary.y || y > boundary.y + boundary.height)
+		if( y < boundary.y + RADIUS || y > boundary.y + boundary.height - RADIUS)
 			dy *= -1;
 	}
 	
