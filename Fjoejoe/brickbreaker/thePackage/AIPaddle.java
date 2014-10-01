@@ -2,7 +2,7 @@ package thePackage;
 
 import processing.core.PApplet;
 
-/**
+/** Hi
  * Paddle controlled by an artificial intelligence
  * @author 60129
  *
