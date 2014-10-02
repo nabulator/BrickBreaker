@@ -7,7 +7,7 @@ import processing.core.PApplet;
  * @author 60129
  *
  */
-public abstract class Paddle
+public class Paddle
 {
 	
 	private float x, y;
@@ -34,5 +34,38 @@ public abstract class Paddle
 		parent.rect(x, y, width, height);
 		parent.fill( parent.color(255) );
 	}
-
+	
+	/**
+	 * Pushes the paddle slightly to the left
+	 */
+	public void pushLeft()
+	{
+		this.x -=5;
+	}
+	
+	/**
+	 * Pushes the paddle slightly to the right
+	 */
+	public void pushRight()
+	{
+		this.x +=5;
+	}
+	
+	/**
+	 * returns x coord
+	 * @return x coord
+	 */
+	public float getX()
+	{
+		return x;
+	}
+	
+	/**
+	 * returns the y coordinate 
+	 * @return the y coordinate
+	 */
+	public float getY()
+	{
+		return y;
+	}
 }
