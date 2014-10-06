@@ -8,7 +8,7 @@ import processing.core.PApplet;
 /**
  * Initiates a game based on user input
  * @author 60129
- *
+ * fg
  */
 public class GameManager 
 {
