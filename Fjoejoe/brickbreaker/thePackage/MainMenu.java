@@ -10,12 +10,15 @@ import processing.core.PApplet;
  */
 public class MainMenu
 {
+	private PApplet parent;
+	private Button p1;
 	/**
 	 * Initializes the main menu
 	 */
-	public MainMenu()
+	public MainMenu(PApplet parent)
 	{
-		
+		this.parent = parent;
+		p1 = new Button(200, 400);
 	}
 	
 	/**
@@ -23,7 +26,11 @@ public class MainMenu
 	 */
 	public void draw()
 	{
-		
+		parent.fill(255); //default color
+		parent.textSize(32);
+		parent.textAlign(parent.LEFT);
+		parent.text("BrickBreaker", 100, 200);
+		p1.draw(parent);
 	}
 	
 	

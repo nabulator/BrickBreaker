@@ -8,7 +8,7 @@ import processing.core.PApplet;
 /**
  * Initiates a game based on user input
  * @author 60129
- * fg
+ * 
  */
 public class GameManager 
 {
@@ -57,10 +57,10 @@ public class GameManager
 	 */
 	public void draw()
 	{
-		if( ) //TODO:	check boolean array
+		/*if( ) //TODO:	check boolean array
 			p1.getPaddle().pushLeft();
 		else if ( )
-			p1.getPaddle().pushRight();
+			p1.getPaddle().pushRight();*/
 
 		
 		parent.rect(p1Bounds.x, p1Bounds.y, p1Bounds.width, p1Bounds.height);
