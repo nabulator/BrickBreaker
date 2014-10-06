@@ -15,7 +15,7 @@ public class BrickBreaker extends PApplet
 		size(960, 680);
 		//this.ellipse(23, 24, 14, 14);
 		
-		gm = new GameManager(this, null);
+		gm = new GameManager(this, "UI");
 	}
 	
 	/**
@@ -41,7 +41,7 @@ public class BrickBreaker extends PApplet
 	 */
 	public void keyReleased()
 	{
-		
+		gm.keyReleased(this.keyCode);
 	}
 	
 	/**
