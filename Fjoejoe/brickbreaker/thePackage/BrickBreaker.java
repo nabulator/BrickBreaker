@@ -50,9 +50,17 @@ public class BrickBreaker extends PApplet
 	/**
 	 * Checks if the mouse has clicked on anything vaguely important
 	 */
-	public void mouseClicked()
+	public void mousePressed()
 	{
-		
+		mm.mousePressed();
+	}
+	
+	/**
+	 * Checks if the mouse has
+	 */
+	public void mouseReleased()
+	{
+		mm.mouseReleased();
 	}
 
 }
