@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import processing.core.PApplet;
 
 /**
- * Initiates a game based on user inputa
+ * Initiates a game based on user input
  * @author 60129
  *
  */
@@ -53,16 +53,16 @@ public class GameManager
 	 */
 	public void draw()
 	{
-		if(keysPressed[0])
+		if(keysPressed[0] && !p1.paddleStuckLeft())
 			p1.getPaddle().pushLeft();
-		else if (keysPressed[1])
+		else if (keysPressed[1] && !p1.paddleStuckRight())
 			p1.getPaddle().pushRight();
 		
 		if(keysPressed.length == 4)
 		{
-			if(keysPressed[2])
+			if(keysPressed[2] && !p2.paddleStuckLeft())
 				p2.getPaddle().pushLeft();
-			else if(keysPressed[3])
+			else if(keysPressed[3] && !p2.paddleStuckRight())
 				p2.getPaddle().pushRight();
 		}
 		
@@ -89,8 +89,8 @@ public class GameManager
 		{
 			switch(keyCode)
 			{
-			case 65: keysPressed[2] = false; break;
-			case 68: keysPressed[3] = false; break;	
+			case 65: keysPressed[2] = true; break;
+			case 68: keysPressed[3] = true; break;	
 			}
 		}
 	}
