@@ -36,7 +36,7 @@ public class PlayerManager
 		this.paddle = new Paddle(boundary.x + boundary.x/2 , boundary.y + boundary.height - Paddle.height);
 		
 		this.boundary = boundary;
-		this.ball = new Ball(boundary.x, boundary.y, null, null, null, boundary);
+		this.ball = new Ball(boundary.x, boundary.y, bricks, paddle, null, boundary);
 		
 		bricks = new ArrayList<Brick>();
 		for(int i=0; i<10; i++)
@@ -62,11 +62,28 @@ public class PlayerManager
 	}
 	
 	/**
+	 * Returns if paddle is touching left side of boundary
+	 * @return if paddle is touching left boundary
+	 */
+	public boolean paddleStuckLeft()
+	{
+		return boundary.getX() == paddle.getX();
+	}
+	
+	/**
+	 * Returns if paddle is touching right side of boundary
+	 * @return if paddle is touching right boundary
+	 */
+	public boolean paddleStuckRight()
+	{
+		return boundary.getX() + boundary.width == paddle.getX() + paddle.width;
+	}
+	
+	/**
 	 * draws the objects of player manager
 	 */
 	public void draw()
 	{
-		
 		for( Brick b: bricks )
 			b.draw(parent);
 		

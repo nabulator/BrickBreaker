@@ -16,7 +16,7 @@ public class Paddle
 	/**
 	 * Creates a paddle
 	 * @param xinit - the initial x-coordinate of the center of paddle
-	 * @param yinit - the intiial y-coordinate of the center of the paddle
+	 * @param yinit - the initial y-coordinate of the center of the paddle
 	 */
 	public Paddle (float xinit, float yinit)
 	{

@@ -1,7 +1,6 @@
 package thePackage;
 
 import java.awt.Rectangle;
-import java.util.HashMap;
 
 import processing.core.PApplet;
 
@@ -15,6 +14,7 @@ public class GameManager
 	private PApplet parent;
 	private PlayerManager p1, p2;
 	private Rectangle p1Bounds, p2Bounds;
+	private boolean[] keysPressed;
 	
 	/**
 	 * Creates a game manager based on the game mode
@@ -28,17 +28,15 @@ public class GameManager
 		p1Bounds = new Rectangle(10, 10, 400, 200);
 		p2Bounds = new Rectangle(410, 10, 400, 200);
 		
-		p1 = new PlayerManager(parent, null, p1Bounds);
-		p2 = new PlayerManager(parent, null, p2Bounds);
+		p1 = new PlayerManager(parent, "UI", p1Bounds);
+		p2 = new PlayerManager(parent, gameMode, p2Bounds);
 		
-		initKeyMaps();
-	}
-	
-	/**
-	 * Maps the controls
-	 */
-	private void initKeyMaps() {
-		
+		if(gameMode.equals("UI"))
+			keysPressed = new boolean[4];
+		else if(gameMode.equals("AI"))
+			keysPressed = new boolean[2];
+		for(int i = 0; i < keysPressed.length; i++)
+			keysPressed[i] = false;
 	}
 
 	/**
@@ -50,18 +48,25 @@ public class GameManager
 		
 	}
 	
-	
-	
 	/**
 	 * Creates a button to return to main menu when game is over
 	 */
 	public void draw()
 	{
-		/*if( ) //TODO:	check boolean array
-			p1.getPaddle().pushLeft();
-		else if ( )
-			p1.getPaddle().pushRight();*/
-
+		
+			if(keysPressed[0] && !p1.paddleStuckLeft())
+				p1.getPaddle().pushLeft();
+			else if (keysPressed[1] && !p1.paddleStuckRight())
+				p1.getPaddle().pushRight();
+			
+			if(keysPressed.length == 4)
+			{
+				if(keysPressed[2] && !p2.paddleStuckLeft())
+					p2.getPaddle().pushLeft();
+				else if(keysPressed[3] && !p2.paddleStuckRight())
+					p2.getPaddle().pushRight();
+			}
+			
 		
 		parent.rect(p1Bounds.x, p1Bounds.y, p1Bounds.width, p1Bounds.height);
 		parent.rect(p2Bounds.x, p2Bounds.y, p2Bounds.width, p2Bounds.height);
@@ -77,16 +82,40 @@ public class GameManager
 	 */
 	public void keyPressed(int keyCode)
 	{
-		
+		switch(keyCode)
+		{
+		case 37: keysPressed[0] = true; break;
+		case 39: keysPressed[1] = true; break;
+		}
+		if(keysPressed.length == 4)
+		{
+			switch(keyCode)
+			{
+			case 65: keysPressed[2] = true; break;
+			case 68: keysPressed[3] = true; break;	
+			}
+		}
 	}
 	
 	/**
 	 * checks if key is released
 	 * @param keyCode
 	 */
-	public void Released(int keyCode)
+	public void keyReleased(int keyCode)
 	{
-		
+		switch(keyCode)
+		{
+		case 37: keysPressed[0] = false; break;
+		case 39: keysPressed[1] = false; break;
+		}
+		if(keysPressed.length == 4)
+		{
+			switch(keyCode)
+			{
+			case 65: keysPressed[2] = false; break;
+			case 68: keysPressed[3] = false; break;	
+			}
+		}
 	}
 	
 }

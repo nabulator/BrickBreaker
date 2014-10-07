@@ -14,8 +14,7 @@ public class BrickBreaker extends PApplet
 	{
 		size(960, 680);
 		//this.ellipse(23, 24, 14, 14);
-		
-		gm = new GameManager(this, null);
+		gm = new GameManager(this, "UI");
 		mm = new MainMenu(this);
 	}
 	
@@ -25,9 +24,9 @@ public class BrickBreaker extends PApplet
 	public void draw()
 	{
 		clear();
-		//gm.draw();
-		this.fill(0);
-		mm.draw();
+		//this.fill(0);
+		gm.draw();
+		//mm.draw();
 	}
 
 	/**
@@ -44,7 +43,7 @@ public class BrickBreaker extends PApplet
 	 */
 	public void keyReleased()
 	{
-		
+		gm.keyReleased(this.keyCode);
 	}
 	
 	/**
