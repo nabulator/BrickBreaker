@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import processing.core.PApplet;
 
 /**
- * Initiates a game based on user input
+ * Initiates a game based on user inputa
  * @author 60129
  *
  */
