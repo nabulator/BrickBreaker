@@ -34,13 +34,20 @@ public class PlayerManager
 		*/
 		//temp for paddle init
 		this.paddle = new Paddle(boundary);
-		
+		this.bricks = new ArrayList<Brick>();
 		this.boundary = boundary;
 		this.ball = new Ball(boundary.x, boundary.y, bricks, paddle, null, boundary);
 		
-		bricks = new ArrayList<Brick>();
 		for(int i=0; i<10; i++)
-			bricks.add( new Brick((float)(Math.random()*(boundary.width-32) + boundary.x), (float)(Math.random()*boundary.height* 0.8 + boundary.y)));
+		{
+			int xBrick = (int)(Math.random()*(boundary.width-32) + boundary.x);
+			int yBrick = (int)(Math.random()*boundary.height* 0.8 + boundary.y);
+			
+			Brick b = new Brick(xBrick, yBrick);
+			bricks.add(b);
+			System.out.println("added brick: " + xBrick + " " + yBrick);
+		}
+			
 		
 	}
 	

@@ -1,5 +1,6 @@
 package thePackage;
 
+import java.awt.Rectangle;
 import processing.core.PApplet;
 
 /**
@@ -9,26 +10,27 @@ import processing.core.PApplet;
  */
 public class Brick
 {
-	private float x, y;
+	public final Rectangle rect;
 	
 	/**
 	 * Creates a brick
 	 * @param xinit - the initial x-coordinate of the center of brick
 	 * @param yinit - the initial y-coordinate of the center of brick
 	 */
-	public Brick(float xinit, float yinit)
+	public Brick(int xinit, int yinit)
 	{
-		this.x = xinit;
-		this.y = yinit;
+		rect = new Rectangle(xinit, yinit, 32, 20);
 	}
 	
 	/**
 	 * Causes damage to brick
 	 * Brick may disappear if health is 0
+	 * @oaram xP the hit point of x
+	 * @param xP the hit point of y
 	 */
-	public void isHit()
+	public boolean isOverlapping (float xP, float yP)
 	{
-		
+		return rect.contains(xP, yP);
 	}
 	
 	/**
@@ -39,7 +41,7 @@ public class Brick
 	{
 		parent.fill(0, 125, 255);
 		parent.stroke(255);
-		parent.rect(x, y, 32, 20);
+		parent.rect(rect.x, rect.y, rect.width, rect.height);
 	}
 	
 }

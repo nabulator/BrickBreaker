@@ -13,7 +13,6 @@ public class BrickBreaker extends PApplet
 	public void setup()
 	{
 		size(960, 680);
-		//this.ellipse(23, 24, 14, 14);
 		gm = new GameManager(this, "UI");
 		mm = new MainMenu(this);
 	}

@@ -51,7 +51,7 @@ public class Ball
 			dy *= -1;
 		
 		paddleHitTest();
-
+		bricksHitTest();
 	}
 	
 	/**
@@ -80,9 +80,40 @@ public class Ball
 	
 	private void bricksHitTest()
 	{
-		for( Brick b : bricks )
+		float rs = this.x + RADIUS; //right side
+		float ls = this.x - RADIUS; //left side
+		float us = this.y + RADIUS; //Top side
+		float ds = this.y - RADIUS; //bottom side
+		
+		for( int i=bricks.size()-1 ; i>=0; i-- )
 		{
+			Brick b = bricks.get(i);
 			
+			if( b.isOverlapping(rs, y)  )
+			{
+				dx *= -1;
+				x = rs - 1;
+				bricks.remove(b);
+			}
+			else if( b.isOverlapping(ls,  y) )
+			{
+				dx *= -1;
+				x = ls + 1;
+				bricks.remove(b);
+			}
+			else if( b.isOverlapping(x, us) )
+			{
+				dy *= -1;
+				y = us - 1;
+				bricks.remove(b);
+			}
+			else if( b.isOverlapping(x, ds) )
+			{
+				dy *= -1;
+				y = ds - 1;
+				bricks.remove(b);
+			}
+				
 		}
 	}
 	

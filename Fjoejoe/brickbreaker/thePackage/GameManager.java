@@ -53,20 +53,18 @@ public class GameManager
 	 */
 	public void draw()
 	{
+		if(keysPressed[0])
+			p1.getPaddle().pushLeft();
+		else if (keysPressed[1])
+			p1.getPaddle().pushRight();
 		
-			if(keysPressed[0])
-				p1.getPaddle().pushLeft();
-			else if (keysPressed[1])
-				p1.getPaddle().pushRight();
-			
-			if(keysPressed.length == 4)
-			{
-				if(keysPressed[2])
-					p2.getPaddle().pushLeft();
-				else if(keysPressed[3])
-					p2.getPaddle().pushRight();
-			}
-			
+		if(keysPressed.length == 4)
+		{
+			if(keysPressed[2])
+				p2.getPaddle().pushLeft();
+			else if(keysPressed[3])
+				p2.getPaddle().pushRight();
+		}
 		
 		parent.rect(p1Bounds.x, p1Bounds.y, p1Bounds.width, p1Bounds.height);
 		parent.rect(p2Bounds.x, p2Bounds.y, p2Bounds.width, p2Bounds.height);
