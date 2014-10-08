@@ -18,6 +18,7 @@ public class Ball
 	private Rectangle boundary;
 	private Paddle paddle;
 	private ArrayList<Brick> bricks;
+	private int timer;
 	
 	/**
 	 * Construct a ball
@@ -35,7 +36,7 @@ public class Ball
 		this.boundary = dimensions;
 		this.paddle = paddle;
 		this.bricks = bricks;
-		
+		timer = 0;
 		dx = 3;
 		dy = 4;
 	}
@@ -47,7 +48,7 @@ public class Ball
 	{
 		if( x < boundary.x + RADIUS || x > boundary.x + boundary.width - RADIUS)
 			dx *= -1;
-		if( y < boundary.y + RADIUS || y > boundary.y + boundary.height - RADIUS)
+		if( y < boundary.y + RADIUS )
 			dy *= -1;
 		
 		paddleHitTest();
@@ -117,6 +118,11 @@ public class Ball
 		}
 	}
 	
+	private boolean inBounds()
+	{
+		return !(y > 480);
+	}
+	
 	/**
 	 * Draws the ball
 	 * @param parent a reference to PApplet
@@ -126,7 +132,19 @@ public class Ball
 		hitTest();
 		parent.fill(234, 32, 56);
 		parent.noStroke();
-		parent.ellipse(x, y, RADIUS*2, RADIUS*2);
+		if(inBounds())
+		{
+			parent.ellipse(x, y, RADIUS*2, RADIUS*2);
+			timer = 0;
+		}
+		else if(timer <= 100)
+			timer++;
+		else
+		{
+			x = paddle.getX();
+			y = paddle.getY() - 10;
+			dy = -4;
+		}
 		x += dx;
 		y += dy;
 	}
