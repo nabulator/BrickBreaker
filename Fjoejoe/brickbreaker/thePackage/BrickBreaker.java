@@ -6,6 +6,7 @@ public class BrickBreaker extends PApplet
 {
 	private MainMenu mm;
 	private GameManager gm;
+	private int mode;
 	
 	/**
 	 * Setup the game
@@ -13,8 +14,8 @@ public class BrickBreaker extends PApplet
 	public void setup()
 	{
 		size(960, 680);
-		gm = new GameManager(this, "UI");
 		mm = new MainMenu(this);
+		mode = 0;
 	}
 	
 	/**
@@ -24,8 +25,21 @@ public class BrickBreaker extends PApplet
 	{
 		clear();
 		//this.fill(0);
-		gm.draw();
-		//mm.draw();
+		switch( mode )
+		{
+			case 0:
+				mm.draw();
+				break;
+			case 1:
+				gm = new GameManager(this, "AI");
+				gm.draw();
+			case 2:
+				gm = new GameManager(this, "UI");
+				gm.draw();
+			default:
+				//draw nothing
+		}
+		
 	}
 
 	/**
@@ -59,6 +73,18 @@ public class BrickBreaker extends PApplet
 	public void mouseReleased()
 	{
 		mm.mouseReleased();
+	}
+	
+	/**
+	 * switches the mode
+	 * 0 - main menu
+	 * 1 - 1 player
+	 * 2 - 2 player
+	 * @param mode
+	 */
+	public void switchMode(int mode)
+	{
+		this.mode = mode;
 	}
 
 }

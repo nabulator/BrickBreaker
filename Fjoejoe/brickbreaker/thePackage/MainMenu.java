@@ -10,13 +10,13 @@ import processing.core.PApplet;
  */
 public class MainMenu
 {
-	private PApplet parent;
+	private BrickBreaker parent;
 	private Button p1, p2;
 	
 	/**
 	 * Initializes the main menu
 	 */
-	public MainMenu(PApplet parent)
+	public MainMenu (BrickBreaker parent)
 	{
 		this.parent = parent;
 		p1 = new Button(parent, 65, 450, "1 Player");
@@ -38,10 +38,10 @@ public class MainMenu
 		parent.sphere(30);
 		
 		if( p1.isPressed() )
-			System.out.println("init 1 player game");
+			parent.switchMode(1);
 		
 		if( p2.isPressed() )
-			System.out.println("init 2 player game");
+			parent.switchMode(2);
 		
 	}
 	
