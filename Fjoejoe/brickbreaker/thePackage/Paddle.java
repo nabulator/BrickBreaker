@@ -1,5 +1,7 @@
 package thePackage;
 
+import java.awt.Rectangle;
+
 import processing.core.PApplet;
 
 /**
@@ -11,6 +13,9 @@ public class Paddle
 {
 	
 	private float x, y;
+	private float xVel; //x Velocity
+	private float acceleration, friction;
+	private Rectangle bounds;
 	public static final int height = 20, width = 60;
 	
 	/**
@@ -18,10 +23,15 @@ public class Paddle
 	 * @param xinit - the initial x-coordinate of the center of paddle
 	 * @param yinit - the initial y-coordinate of the center of the paddle
 	 */
-	public Paddle (float xinit, float yinit)
+	public Paddle (Rectangle bounds)
 	{
-		x = xinit;
-		y = yinit;
+		x = bounds.x + bounds.x/2;
+		y = bounds.y + bounds.height - Paddle.height;
+		this.bounds = bounds;
+		
+		xVel = 0;
+		acceleration = 1.2f;
+		friction = 0.9f;
 	}
 	
 	/**
@@ -30,9 +40,28 @@ public class Paddle
 	 */
 	public void draw(PApplet parent)
 	{
-		parent.fill( parent.color(255, 0, 0) );
+		parent.noStroke();
+		parent.fill( 255, 0, 0 );
 		parent.rect(x, y, width, height);
 		parent.fill( parent.color(255) );
+		
+		this.x += xVel;
+		
+		if( Math.abs(xVel) > 0.05 )
+			xVel *= friction;
+		
+		if( x < bounds.x )
+		{
+			xVel *= -1.2;
+			x = bounds.x + 3;
+		}
+		else if (x + xVel > bounds.x + bounds.width- Paddle.width )
+		{
+			xVel *= -1.2;
+			x = bounds.x + bounds.width - Paddle.width - 3;
+		}
+			
+
 	}
 	
 	/**
@@ -40,7 +69,8 @@ public class Paddle
 	 */
 	public void pushLeft()
 	{
-		this.x -=5;
+		if( Math.abs(xVel) < 5 )
+			xVel -= acceleration;
 	}
 	
 	/**
@@ -48,7 +78,8 @@ public class Paddle
 	 */
 	public void pushRight()
 	{
-		this.x +=5;
+		if( Math.abs(xVel) < 5 )
+			xVel += acceleration;
 	}
 	
 	/**

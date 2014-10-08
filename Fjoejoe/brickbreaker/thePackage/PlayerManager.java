@@ -33,14 +33,14 @@ public class PlayerManager
 			paddle = new AIPaddle(playerNum * 25, playerNum * 25);
 		*/
 		//temp for paddle init
-		this.paddle = new Paddle(boundary.x + boundary.x/2 , boundary.y + boundary.height - Paddle.height);
+		this.paddle = new Paddle(boundary);
 		
 		this.boundary = boundary;
 		this.ball = new Ball(boundary.x, boundary.y, bricks, paddle, null, boundary);
 		
 		bricks = new ArrayList<Brick>();
 		for(int i=0; i<10; i++)
-			bricks.add( new Brick((float)(Math.random()*boundary.width + boundary.x), (float)(Math.random()*boundary.height + boundary.y)));
+			bricks.add( new Brick((float)(Math.random()*(boundary.width-32) + boundary.x), (float)(Math.random()*boundary.height* 0.8 + boundary.y)));
 		
 	}
 	
@@ -59,24 +59,6 @@ public class PlayerManager
 	public void createBrick()
 	{
 		
-	}
-	
-	/**
-	 * Returns if paddle is touching left side of boundary
-	 * @return if paddle is touching left boundary
-	 */
-	public boolean paddleStuckLeft()
-	{
-		return boundary.getX() == paddle.getX();
-	}
-	
-	/**
-	 * Returns if paddle is touching right side of boundary
-	 * @return if paddle is touching right boundary
-	 */
-	public boolean paddleStuckRight()
-	{
-		return boundary.getX() + boundary.width == paddle.getX() + paddle.width;
 	}
 	
 	/**

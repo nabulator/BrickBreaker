@@ -25,8 +25,8 @@ public class GameManager
 	{
 		this.parent = parent;
 		
-		p1Bounds = new Rectangle(10, 10, 400, 200);
-		p2Bounds = new Rectangle(410, 10, 400, 200);
+		p1Bounds = new Rectangle(50, 30, 400, 450);
+		p2Bounds = new Rectangle(500, 30, 400, 450);
 		
 		p1 = new PlayerManager(parent, "UI", p1Bounds);
 		p2 = new PlayerManager(parent, gameMode, p2Bounds);
@@ -54,16 +54,16 @@ public class GameManager
 	public void draw()
 	{
 		
-			if(keysPressed[0] && !p1.paddleStuckLeft())
+			if(keysPressed[0])
 				p1.getPaddle().pushLeft();
-			else if (keysPressed[1] && !p1.paddleStuckRight())
+			else if (keysPressed[1])
 				p1.getPaddle().pushRight();
 			
 			if(keysPressed.length == 4)
 			{
-				if(keysPressed[2] && !p2.paddleStuckLeft())
+				if(keysPressed[2])
 					p2.getPaddle().pushLeft();
-				else if(keysPressed[3] && !p2.paddleStuckRight())
+				else if(keysPressed[3])
 					p2.getPaddle().pushRight();
 			}
 			
@@ -84,15 +84,15 @@ public class GameManager
 	{
 		switch(keyCode)
 		{
-		case 37: keysPressed[0] = true; break;
-		case 39: keysPressed[1] = true; break;
+			case 37: keysPressed[0] = true; break;
+			case 39: keysPressed[1] = true; break;
 		}
 		if(keysPressed.length == 4)
 		{
 			switch(keyCode)
 			{
-			case 65: keysPressed[2] = true; break;
-			case 68: keysPressed[3] = true; break;	
+				case 65: keysPressed[2] = true; break;
+				case 68: keysPressed[3] = true; break;	
 			}
 		}
 	}
@@ -105,15 +105,15 @@ public class GameManager
 	{
 		switch(keyCode)
 		{
-		case 37: keysPressed[0] = false; break;
-		case 39: keysPressed[1] = false; break;
+			case 37: keysPressed[0] = false; break;
+			case 39: keysPressed[1] = false; break;
 		}
 		if(keysPressed.length == 4)
 		{
 			switch(keyCode)
 			{
-			case 65: keysPressed[2] = false; break;
-			case 68: keysPressed[3] = false; break;	
+				case 65: keysPressed[2] = false; break;
+				case 68: keysPressed[3] = false; break;	
 			}
 		}
 	}

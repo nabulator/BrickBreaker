@@ -17,6 +17,7 @@ public class Ball
 	private float dx, dy;
 	private Rectangle boundary;
 	private Paddle paddle;
+	private ArrayList<Brick> bricks;
 	
 	/**
 	 * Construct a ball
@@ -31,10 +32,12 @@ public class Ball
 	{
 		this.x = x + RADIUS;
 		this.y = y + RADIUS;
-		boundary = dimensions;
+		this.boundary = dimensions;
 		this.paddle = paddle;
+		this.bricks = bricks;
+		
 		dx = 3;
-		dy = 2;
+		dy = 4;
 	}
 	
 	/**
@@ -47,34 +50,40 @@ public class Ball
 		if( y < boundary.y + RADIUS || y > boundary.y + boundary.height - RADIUS)
 			dy *= -1;
 		
-		/*
-		//left paddle collision
-		if( x + RADIUS == paddle.getX() && 
-				y > paddle.getY() && y < paddle.getY() + Paddle.height)
-			dx *= -1;
-		//right paddle collision
-		if( x - RADIUS == paddle.getX() + Paddle.width && 
-				y > paddle.getY() && y < paddle.getY() + Paddle.height)
-			dx *= -1;
-		*/
-		
-		//vertical collision
-		if( x >= paddle.getX() && x <= paddle.getX() + Paddle.width
-				&& y > paddle.getY() - RADIUS && y < paddle.getY() + RADIUS + Paddle.height)
-		{
-			dy *= -1;
-			dx = 10 * ( x - paddle.getX() - Paddle.width/2 ) / Paddle.width;
-		}
-		
+		paddleHitTest();
 
 	}
 	
 	/**
 	 * Checks if the ball hits the paddle
 	 */
-	public void paddleHitTest()
-	{
+	private void paddleHitTest()
+	{	
+		//vertical collision
+		if( x >= paddle.getX() && x <= paddle.getX() + Paddle.width
+				&& y > paddle.getY() - Ball.RADIUS && y < paddle.getY() + Ball.RADIUS + Paddle.height)
+		{
+			dy *= -1;
+			y = paddle.getY() - Paddle.height/2 - 1;
+			dx = 10 * ( x - paddle.getX() - Paddle.width/2 ) / Paddle.width;
+		}
 		
+		//ball collide on right
+		/*if( Math.abs( x + Ball.RADIUS - paddle.getX() - Paddle.width/2 ) < RADIUS && y + Ball.RADIUS
+		> paddle.getY() - Paddle.height/2)
+		{
+			dx *= -1;
+			x -= dx;
+		}*/
+		
+	}
+	
+	private void bricksHitTest()
+	{
+		for( Brick b : bricks )
+		{
+			
+		}
 	}
 	
 	/**
@@ -84,6 +93,8 @@ public class Ball
 	public void draw(PApplet parent)
 	{
 		hitTest();
+		parent.fill(234, 32, 56);
+		parent.noStroke();
 		parent.ellipse(x, y, RADIUS*2, RADIUS*2);
 		x += dx;
 		y += dy;

@@ -37,7 +37,9 @@ public class Brick
 	 */
 	public void draw(PApplet parent)
 	{
-		parent.rect(x, y, 25, 15);
+		parent.fill(0, 125, 255);
+		parent.stroke(255);
+		parent.rect(x, y, 32, 20);
 	}
 	
 }
