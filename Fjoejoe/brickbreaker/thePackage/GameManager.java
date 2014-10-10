@@ -14,6 +14,7 @@ public class GameManager
 	private PApplet parent;
 	private PlayerManager p1, p2;
 	private Rectangle p1Bounds, p2Bounds;
+	private Clock timer;
 	private boolean[] keysPressed;
 	
 	/**
@@ -30,6 +31,7 @@ public class GameManager
 		
 		p1 = new PlayerManager(parent, "UI", p1Bounds);
 		p2 = new PlayerManager(parent, gameMode, p2Bounds);
+		timer = new Clock(parent);
 		
 		if(gameMode.equals("UI"))
 			keysPressed = new boolean[4];
@@ -70,8 +72,9 @@ public class GameManager
 		parent.rect(p2Bounds.x, p2Bounds.y, p2Bounds.width, p2Bounds.height);
 		
 		p1.draw();
-		p2.draw();
-				
+		p2.draw();		
+		
+		timer.draw();
 	}
 	
 	/**
