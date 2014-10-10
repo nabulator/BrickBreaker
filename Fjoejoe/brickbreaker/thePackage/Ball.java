@@ -80,10 +80,13 @@ public class Ball
 	
 	private void bricksHitTest()
 	{
+		//relative to ball
 		float rs = this.x + RADIUS; //right side
 		float ls = this.x - RADIUS; //left side
 		float us = this.y + RADIUS; //Top side
 		float ds = this.y - RADIUS; //bottom side
+		
+		
 		
 		for( int i=bricks.size()-1 ; i>=0; i-- )
 		{
@@ -92,29 +95,36 @@ public class Ball
 			if( b.isOverlapping(rs, y)  )
 			{
 				dx *= -1;
-				x = rs - 1;
-				bricks.remove(b);
+				x = b.rect.x + b.rect.width/2 - 2;
+				hitDaBrick(b);
 			}
 			else if( b.isOverlapping(ls,  y) )
 			{
 				dx *= -1;
-				x = ls + 1;
-				bricks.remove(b);
+				x = b.rect.x - b.rect.width/2 + 2;
+				hitDaBrick(b);
 			}
 			else if( b.isOverlapping(x, us) )
 			{
 				dy *= -1;
-				y = us - 1;
-				bricks.remove(b);
+				y = b.rect.y - b.rect.height/2 - 2;
+				hitDaBrick(b);
 			}
 			else if( b.isOverlapping(x, ds) )
 			{
 				dy *= -1;
-				y = ds - 1;
-				bricks.remove(b);
+				y = b.rect.y + b.rect.height/2 + 2;
+				hitDaBrick(b);
 			}
 				
 		}
+	}
+	
+	private void hitDaBrick(Brick b)
+	{
+		b.takeHit();
+		if( b.getHP() <= 0 )
+			bricks.remove(b);
 	}
 	
 	/**

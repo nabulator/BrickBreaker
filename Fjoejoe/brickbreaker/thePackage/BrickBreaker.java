@@ -31,11 +31,11 @@ public class BrickBreaker extends PApplet
 				mm.draw();
 				break;
 			case 1:
-				gm = new GameManager(this, "AI");
 				gm.draw();
+				break;
 			case 2:
-				gm = new GameManager(this, "UI");
 				gm.draw();
+				break;
 			default:
 				//draw nothing
 		}
@@ -80,11 +80,27 @@ public class BrickBreaker extends PApplet
 	 * 0 - main menu
 	 * 1 - 1 player
 	 * 2 - 2 player
-	 * @param mode
+	 * @param mode the desired mode
 	 */
 	public void switchMode(int mode)
 	{
 		this.mode = mode;
+		
+		//change the mode
+		switch( mode )
+		{
+			case 0:
+				mm = new MainMenu(this);
+				break;
+			case 1:
+				gm = new GameManager(this, "AI");
+				break;
+			case 2:
+				gm = new GameManager(this, "UI");
+				break;
+			default:
+				throw new IllegalArgumentException("Invalid mode");
+		}
 	}
 
 }

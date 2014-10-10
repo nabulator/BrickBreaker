@@ -38,7 +38,7 @@ public class PlayerManager
 		this.boundary = boundary;
 		this.ball = new Ball(boundary.x, boundary.y, bricks, paddle, null, boundary);
 		
-		for(int i=0; i<10; i++)
+		for(int i=0; i<20; i++)
 		{
 			int xBrick = (int)(Math.random()*(boundary.width-32) + boundary.x);
 			int yBrick = (int)(Math.random()*boundary.height* 0.8 + boundary.y);
