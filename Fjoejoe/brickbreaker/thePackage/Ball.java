@@ -95,25 +95,25 @@ public class Ball
 			if( b.isOverlapping(rs, y)  )
 			{
 				dx *= -1;
-				x = b.rect.x + b.rect.width/2 - 2;
+				x = b.rect.x - b.rect.width/2.0f - 1 - RADIUS;
 				hitDaBrick(b);
 			}
 			else if( b.isOverlapping(ls,  y) )
 			{
 				dx *= -1;
-				x = b.rect.x - b.rect.width/2 + 2;
+				x = b.rect.x + b.rect.width/2.0f + 1 + RADIUS;
 				hitDaBrick(b);
 			}
 			else if( b.isOverlapping(x, us) )
 			{
 				dy *= -1;
-				y = b.rect.y - b.rect.height/2 - 2;
+				y = b.rect.y - b.rect.height/2.0f - 1;
 				hitDaBrick(b);
 			}
-			else if( b.isOverlapping(x, ds) )
+			else if( b.isOverlapping(x, ds) ) //works
 			{
 				dy *= -1;
-				y = b.rect.y + b.rect.height/2 + 2;
+				y = b.rect.y + b.rect.height/2.0f + 1;
 				hitDaBrick(b);
 			}
 				
