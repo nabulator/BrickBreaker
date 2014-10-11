@@ -1,6 +1,8 @@
 package thePackage;
 
+import java.awt.Color;
 import java.awt.Rectangle;
+
 import processing.core.PApplet;
 
 /**
@@ -11,6 +13,10 @@ import processing.core.PApplet;
 public class Brick
 {
 	public final Rectangle rect;
+	public static Color[] palette = { new Color(0, 125, 255), 
+									  new Color(125, 0, 255) };
+	
+	private int hp;
 	
 	/**
 	 * Creates a brick
@@ -19,7 +25,8 @@ public class Brick
 	 */
 	public Brick(int xinit, int yinit)
 	{
-		rect = new Rectangle(xinit, yinit, 32, 20);
+		rect = new Rectangle(xinit, yinit, 32*2, 20*2);
+		hp = (int)(Math.random() * 2 + 1);
 	}
 	
 	/**
@@ -34,12 +41,30 @@ public class Brick
 	}
 	
 	/**
+	 * Get hit points
+	 * @return hit points
+	 */
+	public int getHP()
+	{
+		return hp; 
+	}
+	
+	/**
+	 * hit the brick 
+	 */
+	public void takeHit()
+	{
+		hp--;
+	}
+	
+	/**
 	 * Draws the brick
 	 * @param parent PApplet parent
 	 */
 	public void draw(PApplet parent)
 	{
-		parent.fill(0, 125, 255);
+		Color col = palette[hp-1];
+		parent.fill( col.getRed(), col.getGreen(), col.getBlue() );
 		parent.stroke(255);
 		parent.rect(rect.x, rect.y, rect.width, rect.height);
 	}

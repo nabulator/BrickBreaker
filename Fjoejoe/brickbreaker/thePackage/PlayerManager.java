@@ -39,7 +39,7 @@ public class PlayerManager
 		this.bricks = new ArrayList<Brick>();
 		this.boundary = boundary;
 		this.ball = new Ball(boundary.x, boundary.y, bricks, paddle, null, boundary);
-		
+
 		for(int i=0; i<10; i++)
 			createBrick();
 		
@@ -54,7 +54,7 @@ public class PlayerManager
 	{
 		return bricks;
 	}
-	
+
 	/**
 	 * Constructs a brick onto the game
 	 */
