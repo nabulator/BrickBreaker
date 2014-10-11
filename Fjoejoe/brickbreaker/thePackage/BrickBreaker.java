@@ -15,7 +15,9 @@ public class BrickBreaker extends PApplet
 	{
 		size(960, 680);
 		mm = new MainMenu(this);
-		mode = 0;
+		gm = new GameManager(this, "UI");
+		mode = 1;
+		//frameRate(10);
 	}
 	
 	/**

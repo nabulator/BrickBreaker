@@ -12,9 +12,9 @@ import processing.core.PApplet;
  */
 public class Ball
 {
-	public static final float RADIUS = 10;
-	private float x, y;
-	private float dx, dy;
+	public static final int RADIUS = 10;
+	private int x, y;
+	private int dx, dy;
 	private Rectangle boundary;
 	private Paddle paddle;
 	private ArrayList<Brick> bricks;
@@ -28,7 +28,7 @@ public class Ball
 	 * @param wall a reference to the wall
 	 * @param dimensions the size of the screen
 	 */
-	public Ball(float x, float y, ArrayList<Brick> bricks, Paddle paddle, Wall wall, Rectangle dimensions)
+	public Ball(int x, int y, ArrayList<Brick> bricks, Paddle paddle, Wall wall, Rectangle dimensions)
 	{
 		this.x = x + RADIUS;
 		this.y = y + RADIUS;
@@ -37,7 +37,7 @@ public class Ball
 		this.bricks = bricks;
 		
 		dx = 3;
-		dy = 4;
+		dy = 5;
 	}
 	
 	/**
@@ -64,8 +64,8 @@ public class Ball
 				&& y > paddle.getY() - Ball.RADIUS && y < paddle.getY() + Ball.RADIUS + Paddle.height)
 		{
 			dy *= -1;
-			y = paddle.getY() - Paddle.height/2 - 1;
-			dx = 10 * ( x - paddle.getX() - Paddle.width/2 ) / Paddle.width;
+			y = (int) (paddle.getY() - Paddle.height/2.0 - 1);
+			dx = (int) (10 * ( x - paddle.getX() - Paddle.width/2.0 ) / Paddle.width);
 		}
 		
 		//ball collide on right
@@ -83,8 +83,8 @@ public class Ball
 		//relative to ball
 		float rs = this.x + RADIUS; //right side
 		float ls = this.x - RADIUS; //left side
-		float us = this.y + RADIUS; //Top side
-		float ds = this.y - RADIUS; //bottom side
+		float us = this.y - RADIUS; //Top side
+		float ds = this.y + RADIUS; //bottom side
 		
 		
 		
@@ -94,26 +94,22 @@ public class Ball
 			
 			if( b.isOverlapping(rs, y)  )
 			{
-				dx *= -1;
-				x = b.rect.x - b.rect.width/2.0f - 1 - RADIUS;
+				dx *= -1;        
 				hitDaBrick(b);
 			}
-			else if( b.isOverlapping(ls,  y) )
-			{
+			if( b.isOverlapping(ls,  y) )
+			{	
 				dx *= -1;
-				x = b.rect.x + b.rect.width/2.0f + 1 + RADIUS;
 				hitDaBrick(b);
 			}
-			else if( b.isOverlapping(x, us) )
+			if( b.isOverlapping(x, us) )
 			{
 				dy *= -1;
-				y = b.rect.y - b.rect.height/2.0f - 1;
 				hitDaBrick(b);
 			}
-			else if( b.isOverlapping(x, ds) ) //works
+			if( b.isOverlapping(x, ds) )
 			{
 				dy *= -1;
-				y = b.rect.y + b.rect.height/2.0f + 1;
 				hitDaBrick(b);
 			}
 				
