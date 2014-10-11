@@ -25,7 +25,7 @@ public class Brick
 	 */
 	public Brick(int xinit, int yinit)
 	{
-		rect = new Rectangle(xinit, yinit, 32*2, 20*2);
+		rect = new Rectangle(xinit, yinit, 32, 20);
 		hp = (int)(Math.random() * 2 + 1);
 	}
 	

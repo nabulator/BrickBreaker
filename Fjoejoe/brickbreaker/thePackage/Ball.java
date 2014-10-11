@@ -148,8 +148,8 @@ public class Ball
 			timer++;
 		else
 		{
-			x = paddle.getX();
-			y = paddle.getY() - 10;
+			x = (int) paddle.getX();
+			y = (int) (paddle.getY() - 10);
 			dy = -4;
 		}
 		x += dx;
