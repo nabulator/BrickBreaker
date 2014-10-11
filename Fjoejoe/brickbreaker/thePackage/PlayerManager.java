@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 
 /**
  * Keeps track of the number of points scored. Creates bricks in correct position 
@@ -82,8 +83,10 @@ public class PlayerManager
 		ball.draw(parent);
 		paddle.draw(parent);
 		
-		parent.fill( 255, 0, 0 );
-		parent.textSize(50);
+		//Draw score
+		parent.fill( 255, 0, 255 );
+		//PFont taho = new PApplet().loadFont("Tahoma.ttf");
+		//parent.textFont(taho, 32);
 		parent.text(score, (float) boundary.getCenterX(), 600);
 		parent.fill( 255 );
 	}

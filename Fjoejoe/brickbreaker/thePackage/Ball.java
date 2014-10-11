@@ -120,7 +120,7 @@ public class Ball
 	
 	private boolean inBounds()
 	{
-		return !(y > 480);
+		return !(y > boundary.y + boundary.height);
 	}
 	
 	/**
@@ -137,7 +137,7 @@ public class Ball
 			parent.ellipse(x, y, RADIUS*2, RADIUS*2);
 			timer = 0;
 		}
-		else if(timer <= 100)
+		else if(timer <= 10)
 			timer++;
 		else
 		{

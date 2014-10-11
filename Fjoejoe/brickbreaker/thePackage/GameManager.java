@@ -26,8 +26,8 @@ public class GameManager
 	{
 		this.parent = parent;
 		
-		p1Bounds = new Rectangle(50, 30, 400, 450);
-		p2Bounds = new Rectangle(500, 30, 400, 450);
+		p1Bounds = new Rectangle(40, 40, 420, 600);
+		p2Bounds = new Rectangle(500, 40, 420, 600);
 		
 		p1 = new PlayerManager(parent, "UI", p1Bounds);
 		p2 = new PlayerManager(parent, gameMode, p2Bounds);

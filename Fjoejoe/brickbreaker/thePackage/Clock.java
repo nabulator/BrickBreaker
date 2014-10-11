@@ -22,7 +22,7 @@ public class Clock
 	
 	public void draw()
 	{
-		parent.fill( 255, 0, 0 );
+		parent.fill( 34, 255, 0 );
 		parent.textSize(50);
 		parent.text(getTimeLeft(), 440, 50);
 		parent.fill( 255 );
