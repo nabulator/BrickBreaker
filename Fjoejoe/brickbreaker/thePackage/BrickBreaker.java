@@ -1,9 +1,13 @@
 package thePackage;
 
 import processing.core.PApplet;
+import ddf.minim.*;
 
 public class BrickBreaker extends PApplet 
 {
+	//sound stuff
+	private Minim m;
+	
 	private MainMenu mm;
 	private GameManager gm;
 	private int mode;
@@ -14,10 +18,14 @@ public class BrickBreaker extends PApplet
 	public void setup()
 	{
 		size(960, 680);
+		m = new Minim(this);
 		mm = new MainMenu(this);
 		gm = new GameManager(this, "UI");
 		mode = 1;
 		//frameRate(10);
+		
+		AudioPlayer song = m.loadFile("01 Adventure.mp3");
+		//song.play();
 	}
 	
 	/**
@@ -42,6 +50,11 @@ public class BrickBreaker extends PApplet
 				//draw nothing
 		}
 		
+	}
+	
+	public void exit()
+	{
+		m.stop();
 	}
 
 	/**

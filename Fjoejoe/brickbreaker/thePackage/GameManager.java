@@ -31,8 +31,8 @@ public class GameManager
 		
 		p1 = new PlayerManager(parent, "UI", p1Bounds);
 		p2 = new PlayerManager(parent, gameMode, p2Bounds);
-		timer = new Clock(parent);
-		
+		timer = new Clock(parent, this);
+
 		if(gameMode.equals("UI"))
 			keysPressed = new boolean[4];
 		else if(gameMode.equals("AI"))
@@ -47,7 +47,9 @@ public class GameManager
 	 */
 	public void endGame()
 	{
-		
+		System.out.println("End Game");
+		p1.endGame();
+		p2.endGame();
 	}
 	
 	/**

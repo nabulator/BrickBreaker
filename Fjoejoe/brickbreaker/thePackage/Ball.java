@@ -1,7 +1,10 @@
 package thePackage;
 
 import java.awt.Rectangle;
+import java.awt.event.*;
 import java.util.ArrayList;
+
+import javax.swing.Timer;
 
 import processing.core.PApplet;
 
@@ -18,7 +21,8 @@ public class Ball
 	private Rectangle boundary;
 	private Paddle paddle;
 	private ArrayList<Brick> bricks;
-	private int timer;
+	private Timer respawnTimer;
+	private static boolean isOver = false; 
 	
 	/**
 	 * Construct a ball
@@ -36,11 +40,27 @@ public class Ball
 		this.boundary = dimensions;
 		this.paddle = paddle;
 		this.bricks = bricks;
-		timer = 0;
+		
 		dx = 3;
 		dy = 5;
+		
+		ActionListener respawnListener = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				serveBall();
+			}
+		};
+		respawnTimer = new Timer(2000, respawnListener);
 	}
 	
+	protected void serveBall() {
+		//reset position
+		x = (int) paddle.getX();
+		y = (int) (paddle.getY() - 10);
+		dy = -4;
+		dx = (int)(Math.random() * 4 - 2);
+		respawnTimer.stop();
+	}
+
 	/**
 	 * Repeatedly called in draw method to test if ball hits boundaries, wall or bricks
 	 */
@@ -87,8 +107,6 @@ public class Ball
 		float us = this.y - RADIUS; //Top side
 		float ds = this.y + RADIUS; //bottom side
 		
-		
-		
 		for( int i=bricks.size()-1 ; i>=0; i-- )
 		{
 			Brick b = bricks.get(i);
@@ -130,6 +148,11 @@ public class Ball
 
 	}
 	
+	public void stop()
+	{	
+		isOver = true;
+	}
+	
 	/**
 	 * Draws the ball
 	 * @param parent a reference to PApplet
@@ -139,21 +162,19 @@ public class Ball
 		hitTest();
 		parent.fill(234, 32, 56);
 		parent.noStroke();
-		if(inBounds())
-		{
+		
+		if( !respawnTimer.isRunning() )
 			parent.ellipse(x, y, RADIUS*2, RADIUS*2);
-			timer = 0;
-		}
-		else if(timer <= 10)
-			timer++;
-		else
+		
+		if( !inBounds() )
+			respawnTimer.start();
+		
+		if( ! isOver )
 		{
-			x = (int) paddle.getX();
-			y = (int) (paddle.getY() - 10);
-			dy = -4;
+			x += dx;
+			y += dy;
 		}
-		x += dx;
-		y += dy;
+		
 	}
 	
 }

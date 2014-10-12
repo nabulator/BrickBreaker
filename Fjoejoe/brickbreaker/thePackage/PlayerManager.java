@@ -83,14 +83,28 @@ public class PlayerManager
 		ball.draw(parent);
 		paddle.draw(parent);
 		
+		if(gameOver)
+		{
+			parent.fill(0, 122);
+			parent.rect(boundary.x, boundary.y, boundary.width, boundary.height);
+		}
+		
 		//Draw score
 		parent.fill( 255, 0, 255 );
 		//PFont taho = new PApplet().loadFont("Tahoma.ttf");
 		//parent.textFont(taho, 32);
 		parent.text(score, (float) boundary.getCenterX(), 600);
 		parent.fill( 255 );
+		
+		
 	}
 	
+	private static boolean gameOver = false;
+	public void endGame()
+	{
+		gameOver = true;
+		ball.stop();
+	}
 	
 	public Paddle getPaddle()
 	{
