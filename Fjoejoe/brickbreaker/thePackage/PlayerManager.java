@@ -93,6 +93,12 @@ public class PlayerManager
 			parent.rect(boundary.x, boundary.y, boundary.width, boundary.height);
 		}
 		
+		if(gameOver)
+		{
+			parent.fill(0, 122);
+			parent.rect(boundary.x, boundary.y, boundary.width, boundary.height);
+		}
+		
 		//Draw score
 		parent.fill( 255, 0, 255 );
 		//PFont taho = new PApplet().loadFont("Tahoma.ttf");
