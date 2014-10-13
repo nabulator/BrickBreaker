@@ -87,15 +87,16 @@ public class GameManager
 	{
 		switch(keyCode)
 		{
-			case 37: keysPressed[2] = true; break;
-			case 39: keysPressed[3] = true; break;
+			case 65: keysPressed[0] = true; break;
+			case 68: keysPressed[1] = true; break;	
 		}
 		if(keysPressed.length == 4)
 		{
 			switch(keyCode)
 			{
-				case 65: keysPressed[0] = true; break;
-				case 68: keysPressed[1] = true; break;	
+				case 37: keysPressed[2] = true; break;
+				case 39: keysPressed[3] = true; break;
+				
 			}
 		}
 	}
@@ -108,15 +109,15 @@ public class GameManager
 	{
 		switch(keyCode)
 		{
-			case 37: keysPressed[2] = false; break;
-			case 39: keysPressed[3] = false; break;
+			case 65: keysPressed[0] = false; break;
+			case 68: keysPressed[1] = false; break;	
 		}
 		if(keysPressed.length == 4)
 		{
 			switch(keyCode)
 			{
-				case 65: keysPressed[0] = false; break;
-				case 68: keysPressed[1] = false; break;	
+				case 37: keysPressed[2] = false; break;
+				case 39: keysPressed[3] = false; break;
 			}
 		}
 	}
