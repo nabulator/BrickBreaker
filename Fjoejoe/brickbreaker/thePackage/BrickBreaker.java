@@ -63,7 +63,6 @@ public class BrickBreaker extends PApplet
 	public void keyPressed()
 	{
 		gm.keyPressed(this.keyCode);
-		
 	}
 	
 	/**
