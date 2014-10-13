@@ -4,7 +4,6 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
-import processing.core.PFont;
 
 /**
  * Keeps track of the number of points scored. Creates bricks in correct position 
@@ -20,6 +19,8 @@ public class PlayerManager
 	private ArrayList<Brick> bricks;
 	private Rectangle boundary;
 	private int score;
+	private String playerType;
+	
 	/**
 	 * Creates a player that takes input by either UI or AI
 	 * @param parent the PApplet parent
@@ -29,12 +30,6 @@ public class PlayerManager
 	public PlayerManager(PApplet parent, String playerType, Rectangle boundary)
 	{
 		this.parent = parent;
-		/*if(playerType.equals("AI"))
-			paddle = new AIPaddle(playerNum * 25, playerNum * 25);
-		else if(playerType.equals("UI"))
-			paddle = new AIPaddle(playerNum * 25, playerNum * 25);
-		*/
-		//temp for paddle init
 		this.paddle = new Paddle(boundary);
 		this.bricks = new ArrayList<Brick>();
 		this.boundary = boundary;
@@ -42,6 +37,8 @@ public class PlayerManager
 
 		for(int i=0; i<10; i++)
 			createBrick();
+		
+		this.playerType = playerType;
 		
 		score = 0;
 	}
@@ -67,6 +64,16 @@ public class PlayerManager
 		bricks.add(b);
 	}
 	
+	public void moveAI()
+	{
+		if(paddle.getY() - ball.getY() > 30 && paddle.getY() - ball.getY() < 200)
+			if(paddle.getX() + (0.5 * Paddle.width) < ball.getX())
+				paddle.pushRight();
+			
+			else if(paddle.getX() + (0.5 * Paddle.width) > ball.getX())
+				paddle.pushLeft();
+	}
+	
 	/**
 	 * draws the objects of player manager
 	 */
@@ -80,6 +87,12 @@ public class PlayerManager
 			createBrick();
 			score+= 50;
 		}
+		
+		if(playerType.equals("AI") && Math.random() > 0.5)
+		{
+			moveAI();
+		}
+		
 		ball.draw(parent);
 		paddle.draw(parent);
 		
@@ -95,8 +108,6 @@ public class PlayerManager
 		//parent.textFont(taho, 32);
 		parent.text(score, (float) boundary.getCenterX(), 600);
 		parent.fill( 255 );
-		
-		
 	}
 	
 	private static boolean gameOver = false;

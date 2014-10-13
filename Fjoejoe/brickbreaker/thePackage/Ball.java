@@ -173,8 +173,21 @@ public class Ball
 		{
 			x += dx;
 			y += dy;
-		}
-		
+		}	
+	}
+	
+	/**
+	 * Returns x position of ball
+	 * @return x position of ball
+	 */
+	public int getX()
+	{
+		return x;
+	}
+	
+	public int getY()
+	{
+		return y;
 	}
 	
 }
