@@ -1,5 +1,6 @@
 package thePackage;
 
+import java.awt.Rectangle;
 import processing.core.PApplet;
 
 /**
@@ -9,12 +10,13 @@ import processing.core.PApplet;
  */
 public class Wall
 {
+	private Rectangle boundary;
 	/**
 	 * Creates a wall
 	 */
-	public Wall()
+	public Wall(Rectangle bounds)
 	{
-		
+		this.boundary = bounds;
 	}
 	
 	/**
@@ -23,7 +25,7 @@ public class Wall
 	 */
 	public void draw(PApplet parent)
 	{
-		
+		parent.rect(boundary.x, boundary.y, 20, boundary.height);
 	}
 	
 	/**

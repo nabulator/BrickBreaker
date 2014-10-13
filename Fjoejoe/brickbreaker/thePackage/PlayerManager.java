@@ -17,6 +17,7 @@ public class PlayerManager
 	private PApplet parent;
 	private Paddle paddle;
 	private Ball ball;
+	private Wall wall;
 	private ArrayList<Brick> bricks;
 	private Rectangle boundary;
 	private int score;
@@ -44,6 +45,7 @@ public class PlayerManager
 			createBrick();
 		
 		score = 0;
+		wall = new Wall(this.boundary);
 	}
 	
 	/**
@@ -80,8 +82,10 @@ public class PlayerManager
 			createBrick();
 			score+= 50;
 		}
+		
 		ball.draw(parent);
 		paddle.draw(parent);
+		wall.draw(parent);
 		
 		if(gameOver)
 		{

@@ -35,8 +35,6 @@ public class MainMenu
 		p1.draw();
 		p2.draw();
 		
-		parent.sphere(30);
-		
 		if( p1.isPressed() )
 			parent.switchMode(1);
 		
