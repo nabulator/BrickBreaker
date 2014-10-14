@@ -18,7 +18,9 @@ public class Clock
 		this.gm = gm;
 		this.x = 450;
 		this.y = 50;
+
 		end = new Date(new Date().getTime() + 100000);
+
 		stopped = false;
 	}
 	

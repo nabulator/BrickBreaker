@@ -55,11 +55,6 @@ public class Button
 		parent.textSize(16);
 		parent.textAlign(parent.CENTER);
 		parent.text(this.text, bounds.x + bounds.width/2, bounds.y + bounds.height/2 + 7);
-		
-		//graphics
-		parent.stroke(100);
-		parent.strokeWeight(3);
-		parent.line(350, 60, 350, 580);
 	}
 	
 	/**

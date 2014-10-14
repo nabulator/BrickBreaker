@@ -11,10 +11,12 @@ import processing.core.PApplet;
  */
 public class GameManager 
 {
-	private PApplet parent;
+	private BrickBreaker parent;
 	private PlayerManager p1, p2;
 	private Rectangle p1Bounds, p2Bounds;
 	private Clock timer;
+	private Button resetBtn;
+	private static boolean endGame;
 	private boolean[] keysPressed;
 	
 	/**
@@ -22,7 +24,7 @@ public class GameManager
 	 * @param parent the PApplet parent
 	 * @param gameMode the type of game mode
 	 */
-	public GameManager(PApplet parent, String gameMode)
+	public GameManager(BrickBreaker parent, String gameMode)
 	{
 		this.parent = parent;
 		
@@ -32,6 +34,7 @@ public class GameManager
 		p1 = new PlayerManager(parent, "UI", p1Bounds);
 		p2 = new PlayerManager(parent, gameMode, p2Bounds);
 		timer = new Clock(parent, this);
+		resetBtn = new Button(parent, 480-105, 600, "Menu");
 
 		if(gameMode.equals("UI"))
 			keysPressed = new boolean[4];
@@ -39,6 +42,8 @@ public class GameManager
 			keysPressed = new boolean[2];
 		for(int i = 0; i < keysPressed.length; i++)
 			keysPressed[i] = false;
+		
+		endGame = false;
 	}
 
 	/**
@@ -47,7 +52,7 @@ public class GameManager
 	 */
 	public void endGame()
 	{
-		System.out.println("End Game");
+		endGame = true;
 		p1.endGame();
 		p2.endGame();
 	}
@@ -77,6 +82,12 @@ public class GameManager
 		p2.draw();		
 		
 		timer.draw();
+		
+		if(endGame)
+			resetBtn.draw();
+		if( resetBtn.isPressed() )
+			parent.switchMode(0);
+			
 	}
 	
 	/**
@@ -120,6 +131,16 @@ public class GameManager
 				case 39: keysPressed[3] = false; break;
 			}
 		}
+	}
+	
+	public void mousePressed()
+	{
+		resetBtn.mousePressed();
+	}
+	
+	public void mouseReleased()
+	{
+		resetBtn.mouseReleased();
 	}
 	
 }
