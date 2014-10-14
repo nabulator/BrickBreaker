@@ -21,7 +21,7 @@ public class BrickBreaker extends PApplet
 		m = new Minim(this);
 		mm = new MainMenu(this);
 		gm = new GameManager(this, "UI");
-		mode = 0;
+		mode = 1;
 		//frameRate(10);
 		
 		AudioPlayer song = m.loadFile("01 Adventure.mp3");
@@ -79,6 +79,7 @@ public class BrickBreaker extends PApplet
 	public void mousePressed()
 	{
 		mm.mousePressed();
+		gm.mousePressed();
 	}
 	
 	/**
@@ -87,6 +88,7 @@ public class BrickBreaker extends PApplet
 	public void mouseReleased()
 	{
 		mm.mouseReleased();
+		gm.mouseReleased();
 	}
 	
 	/**
@@ -99,6 +101,7 @@ public class BrickBreaker extends PApplet
 	public void switchMode(int mode)
 	{
 		this.mode = mode;
+		this.clear();
 		
 		//change the mode
 		switch( mode )

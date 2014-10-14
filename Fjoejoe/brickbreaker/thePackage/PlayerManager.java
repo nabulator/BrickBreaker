@@ -1,7 +1,11 @@
 package thePackage;
 
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.Timer;
 
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -21,6 +25,9 @@ public class PlayerManager
 	private ArrayList<Brick> bricks;
 	private Rectangle boundary;
 	private int score;
+	private int comboCount;
+	private Timer comboTimer;
+	private static boolean gameOver;
 	/**
 	 * Creates a player that takes input by either UI or AI
 	 * @param parent the PApplet parent
@@ -39,15 +46,43 @@ public class PlayerManager
 		this.paddle = new Paddle(boundary);
 		this.bricks = new ArrayList<Brick>();
 		this.boundary = boundary;
-		this.ball = new Ball(boundary.x, boundary.y, bricks, paddle, null, boundary);
-
+		this.wall = new Wall(this.boundary);
+		this.ball = new Ball(paddle.getX(), paddle.getY() - paddle.height, bricks, paddle, wall, boundary);
+		
+		ActionListener comboListener = new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				comboTimeout();
+			}
+			
+		};
+		comboTimer = new Timer(1000, comboListener);
+		
 		for(int i=0; i<10; i++)
 			createBrick();
 		
 		score = 0;
-		wall = new Wall(this.boundary);
+		comboCount = 0;
+		gameOver = false;
+		
 	}
 	
+	protected void comboTimeout() {
+		comboTimer.stop();
+		wall.moveDown(1, bricks);
+		comboCount = 0;
+	}
+	
+	protected void comboIncrease() {
+		if( comboTimer.isRunning() )
+			comboTimer.restart();
+		else
+			comboTimer.start();
+		
+		comboCount++;
+		
+		
+	}
+
 	/**
 	 * Returns a list of bricks in the game
 	 * @return List of bricks
@@ -80,18 +115,13 @@ public class PlayerManager
 		if(bricks.size() < 10)
 		{
 			createBrick();
-			score+= 50;
+			score += 50;
 		}
 		
-		ball.draw(parent);
+		
+		ball.draw(parent, this);
 		paddle.draw(parent);
 		wall.draw(parent);
-		
-		if(gameOver)
-		{
-			parent.fill(0, 122);
-			parent.rect(boundary.x, boundary.y, boundary.width, boundary.height);
-		}
 		
 		if(gameOver)
 		{
@@ -103,13 +133,13 @@ public class PlayerManager
 		parent.fill( 255, 0, 255 );
 		//PFont taho = new PApplet().loadFont("Tahoma.ttf");
 		//parent.textFont(taho, 32);
+		parent.textSize(50);
 		parent.text(score, (float) boundary.getCenterX(), 600);
+		parent.text(comboCount, boundary.x + 60, boundary.y + 60);
 		parent.fill( 255 );
-		
 		
 	}
 	
-	private static boolean gameOver = false;
 	public void endGame()
 	{
 		gameOver = true;

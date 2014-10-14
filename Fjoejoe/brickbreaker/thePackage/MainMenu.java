@@ -35,6 +35,11 @@ public class MainMenu
 		p1.draw();
 		p2.draw();
 		
+		//graphics
+		parent.stroke(100);
+		parent.strokeWeight(3);
+		parent.line(350, 60, 350, 580);
+		
 		if( p1.isPressed() )
 			parent.switchMode(1);
 		

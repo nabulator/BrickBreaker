@@ -3,9 +3,7 @@ package thePackage;
 import java.awt.Rectangle;
 import java.awt.event.*;
 import java.util.ArrayList;
-
 import javax.swing.Timer;
-
 import processing.core.PApplet;
 
 /**
@@ -21,8 +19,9 @@ public class Ball
 	private Rectangle boundary;
 	private Paddle paddle;
 	private ArrayList<Brick> bricks;
+	private Wall wall;
 	private Timer respawnTimer;
-	private static boolean isOver = false; 
+	private static boolean isOver;
 
 	
 	/**
@@ -36,14 +35,15 @@ public class Ball
 	 */
 	public Ball(float x, float y, ArrayList<Brick> bricks, Paddle paddle, Wall wall, Rectangle dimensions)
 	{
-		this.x = x + RADIUS;
-		this.y = y + RADIUS;
+		this.x = x;
+		this.y = y;
 		this.boundary = dimensions;
 		this.paddle = paddle;
 		this.bricks = bricks;
+		this.wall = wall;
 		
-		dx = 3;
-		dy = 5;
+		dx = 5;
+		dy = 6;
 		
 		ActionListener respawnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -51,6 +51,8 @@ public class Ball
 			}
 		};
 		respawnTimer = new Timer(2000, respawnListener);
+		isOver = false;
+		serveBall();
 	}
 	
 	protected void serveBall() {
@@ -65,15 +67,15 @@ public class Ball
 	/**
 	 * Repeatedly called in draw method to test if ball hits boundaries, wall or bricks
 	 */
-	public void hitTest()
+	private void hitTest(PlayerManager pm)
 	{
 		if( x < boundary.x + RADIUS || x > boundary.x + boundary.width - RADIUS)
 			dx *= -1;
-		if( y < boundary.y + RADIUS || y > boundary.y + boundary.height - RADIUS)
+		if( y < boundary.y + RADIUS || y < wall.getBottom() + RADIUS)
 			dy *= -1;
 		
 		paddleHitTest();
-		bricksHitTest();
+		bricksHitTest(pm);
 	}
 	
 	/**
@@ -100,7 +102,7 @@ public class Ball
 		
 	}
 	
-	private void bricksHitTest()
+	private void bricksHitTest(PlayerManager pm)
 	{
 		//relative to ball
 		float rs = this.x + RADIUS; //right side
@@ -115,26 +117,26 @@ public class Ball
 			if( b.isOverlapping(rs, y)  )
 			{
 				dx *= -1;
-				x = b.rect.x - b.rect.width/2.0f - 1 - RADIUS;
 				hitDaBrick(b);
+				pm.comboIncrease();
 			}
 			else if( b.isOverlapping(ls,  y) )
 			{
 				dx *= -1;
-				x = b.rect.x + b.rect.width/2.0f + 1 + RADIUS;
 				hitDaBrick(b);
+				pm.comboIncrease();
 			}
 			else if( b.isOverlapping(x, us) )
 			{
 				dy *= -1;
-				y = b.rect.y - b.rect.height/2.0f - 1;
 				hitDaBrick(b);
+				pm.comboIncrease();
 			}
 			else if( b.isOverlapping(x, ds) ) //works
 			{
 				dy *= -1;
-				y = b.rect.y + b.rect.height/2.0f + 1;
 				hitDaBrick(b);
+				pm.comboIncrease();
 			}
 				
 		}
@@ -155,13 +157,13 @@ public class Ball
 	/**
 	 * Draws the ball
 	 * @param parent a reference to PApplet
+	 * @param pm the playerManger
 	 */
-	public void draw(PApplet parent)
+	public void draw(PApplet parent, PlayerManager pm)
 	{
-		hitTest();
+		hitTest(pm);
 		parent.fill(234, 32, 56);
 		parent.noStroke();
-
 		
 		if( !respawnTimer.isRunning() )
 			parent.ellipse(x, y, RADIUS*2, RADIUS*2);
@@ -177,8 +179,7 @@ public class Ball
 	}
 
 	private boolean inBounds() {
-		
-		return this.y + RADIUS > boundary.y;
+		return this.y - RADIUS < boundary.y + boundary.height;
 	}
 	
 }
