@@ -12,7 +12,7 @@ public class BrickBreaker extends PApplet
 	private GameManager gm;
 	private int mode;
 	
-	/**
+	/**f
 	 * Setup the game
 	 */
 	public void setup()
