@@ -31,8 +31,8 @@ public class GameManager
 		p1Bounds = new Rectangle(40, 40, 420, 600);
 		p2Bounds = new Rectangle(500, 40, 420, 600);
 		
-		p1 = new PlayerManager(parent, "UI", p1Bounds);
-		p2 = new PlayerManager(parent, gameMode, p2Bounds);
+		p1 = new PlayerManager(parent, this, "UI", p1Bounds, 2);
+		p2 = new PlayerManager(parent, this, gameMode, p2Bounds, 1);
 		timer = new Clock(parent, this);
 		resetBtn = new Button(parent, 480-105, 600, "Menu");
 
@@ -141,6 +141,21 @@ public class GameManager
 	public void mouseReleased()
 	{
 		resetBtn.mouseReleased();
+	}
+	
+	/**
+	 * Precondition: i must be 1 or 2 and nothing 
+	 * @param i the player number
+	 * @return a ref to wall
+	 */
+	public Wall getWall( int i )
+	{
+		if( i==1 )
+			return p1.getWall();
+		else if ( i==2 )
+			return p2.getWall();
+		else
+			return null;
 	}
 	
 }

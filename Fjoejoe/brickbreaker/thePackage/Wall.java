@@ -36,14 +36,25 @@ public class Wall
 	
 	/**
 	 * Moves wall down
+	 * @param pm a reference to playermanager
 	 * @param brickLayers the degree it moves down
+	 * @param bricks the bricks
 	 */
-	public void moveDown( int brickLayers, ArrayList<Brick> bricks )
+	public void moveDown( PlayerManager pm, int brickLayers, ArrayList<Brick> bricks )
 	{
-		depth += brickLayers * 20;
+		if( depth < boundary.height - 80)
+			depth += brickLayers * 10;
 		
-		for(Brick b : bricks)
-			b.rect.y += depth;
+		for(int i=bricks.size()-1 ; i>=0 ; i--)
+		{
+			Brick b = bricks.get(i);
+			if( b.rect.y <= getBottom() )
+			{
+				bricks.remove(i);
+				pm.createBrick();
+			}
+			
+		}
 	}
 	
 	/**

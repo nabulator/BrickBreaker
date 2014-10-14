@@ -18,6 +18,7 @@ import processing.core.PApplet;
 public class PlayerManager 
 {
 	private PApplet parent;
+	private GameManager gm;
 	private Paddle paddle;
 	private Ball ball;
 	private Wall wall;
@@ -25,6 +26,7 @@ public class PlayerManager
 	private Rectangle boundary;
 	private int score;
 	private int comboCount;
+	private int secretId;
 	private Timer comboTimer;
 	private static boolean gameOver;
 	private String playerType;
@@ -35,12 +37,14 @@ public class PlayerManager
 	 * @param playerType the type of player
 	 * @param playerSide which half of the screen player is on
 	 */
-	public PlayerManager(PApplet parent, String playerType, Rectangle boundary)
+	public PlayerManager(PApplet parent, GameManager gm, String playerType, Rectangle boundary, int i)
 	{
 		this.parent = parent;
+		this.gm = gm;
 		this.paddle = new Paddle(boundary);
 		this.bricks = new ArrayList<Brick>();
 		this.boundary = boundary;
+		this.secretId = i;
 		this.wall = new Wall(this.boundary);
 		this.ball = new Ball(paddle.getX(), paddle.getY() - paddle.height, bricks, paddle, wall, boundary);
 		
@@ -50,9 +54,9 @@ public class PlayerManager
 			}
 			
 		};
-		comboTimer = new Timer(1000, comboListener);
+		comboTimer = new Timer(500, comboListener);
 		
-		for(int i=0; i<10; i++)
+		for(int j=0; j<10; j++)
 			createBrick();
 		
 		this.playerType = playerType;
@@ -65,7 +69,8 @@ public class PlayerManager
 	
 	protected void comboTimeout() {
 		comboTimer.stop();
-		wall.moveDown(1, bricks);
+		if(comboCount >= 4)
+			gm.getWall(secretId).moveDown(this, comboCount/4, bricks);
 		comboCount = 0;
 	}
 	
@@ -76,7 +81,6 @@ public class PlayerManager
 			comboTimer.start();
 		
 		comboCount++;
-		
 		
 	}
 
@@ -95,7 +99,7 @@ public class PlayerManager
 	public void createBrick()
 	{
 		int xBrick = (int)(Math.random()*(boundary.width-32) + boundary.x);
-		int yBrick = (int)(Math.random()* (boundary.height - wall.getHeight() ) + boundary.y + wall.getHeight());
+		int yBrick = (int)(Math.random()* (boundary.height - wall.getHeight() - 80)  + boundary.y + wall.getHeight());
 		
 		Brick b = new Brick(xBrick, yBrick);
 		bricks.add(b);
@@ -124,7 +128,6 @@ public class PlayerManager
 			createBrick();
 			score += 50;
 		}
-		
 		
 		ball.draw(parent, this);
 
@@ -162,5 +165,10 @@ public class PlayerManager
 	public Paddle getPaddle()
 	{
 		return this.paddle;
+	}
+	
+	public Wall getWall()
+	{
+		return this.wall;
 	}
 }
