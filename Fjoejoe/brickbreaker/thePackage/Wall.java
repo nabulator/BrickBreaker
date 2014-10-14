@@ -53,4 +53,8 @@ public class Wall
 	public int getBottom(){
 		return boundary.y + depth;
 	}
+	
+	public int getHeight(){
+		return depth;
+	}
 }

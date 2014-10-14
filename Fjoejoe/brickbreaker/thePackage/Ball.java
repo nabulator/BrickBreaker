@@ -42,8 +42,8 @@ public class Ball
 		this.bricks = bricks;
 		this.wall = wall;
 		
-		dx = 5;
-		dy = 6;
+		dx = 9;
+		dy = 12;
 		
 		ActionListener respawnListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -59,8 +59,8 @@ public class Ball
 		//reset position
 		x = (int) paddle.getX();
 		y = (int) (paddle.getY() - 10);
-		dy = -4;
-		dx = (int)(Math.random() * 4 - 2);
+		dy = -6;
+		dx = (int)(Math.random() * 8 - 4);
 		respawnTimer.stop();
 	}
 
@@ -69,10 +69,17 @@ public class Ball
 	 */
 	private void hitTest(PlayerManager pm)
 	{
-		if( x < boundary.x + RADIUS || x > boundary.x + boundary.width - RADIUS)
+		if( x < boundary.x + RADIUS || x > boundary.x + boundary.width - RADIUS )
 			dx *= -1;
-		if( y < boundary.y + RADIUS || y < wall.getBottom() + RADIUS)
+		if( y < boundary.y + RADIUS )
 			dy *= -1;
+		
+		//wall
+		if( y < wall.getBottom() + RADIUS )
+		{
+			y = wall.getBottom() + RADIUS + 1;
+			dy *= -1;
+		}
 		
 		paddleHitTest();
 		bricksHitTest(pm);

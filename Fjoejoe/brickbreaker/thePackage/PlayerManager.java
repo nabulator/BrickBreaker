@@ -98,7 +98,7 @@ public class PlayerManager
 	public void createBrick()
 	{
 		int xBrick = (int)(Math.random()*(boundary.width-32) + boundary.x);
-		int yBrick = (int)(Math.random()*boundary.height* 0.8 + boundary.y);
+		int yBrick = (int)(Math.random()* (boundary.height - wall.getHeight() ) + boundary.y + wall.getHeight());
 		
 		Brick b = new Brick(xBrick, yBrick);
 		bricks.add(b);
@@ -112,7 +112,7 @@ public class PlayerManager
 		for( Brick b: bricks )
 			b.draw(parent);
 		
-		if(bricks.size() < 10)
+		if(bricks.size() < 20)
 		{
 			createBrick();
 			score += 50;
