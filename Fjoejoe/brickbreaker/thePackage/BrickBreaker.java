@@ -21,7 +21,7 @@ public class BrickBreaker extends PApplet
 		m = new Minim(this);
 		mm = new MainMenu(this);
 		gm = new GameManager(this, "UI");
-		mode = 1;
+		mode = 0;
 		//frameRate(10);
 		
 		AudioPlayer song = m.loadFile("01 Adventure.mp3");

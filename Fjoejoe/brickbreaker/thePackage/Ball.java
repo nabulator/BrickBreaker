@@ -185,8 +185,23 @@ public class Ball
 		}
 	}
 
-	private boolean inBounds() {
+	private boolean inBounds() 
+	{
 		return this.y - RADIUS < boundary.y + boundary.height;
+	}
+	
+	/**
+	 * Returns x position of ball
+	 * @return x position of ball
+	 */
+	public float getX()
+	{
+		return x;
+	}
+	
+	public float getY()
+	{
+		return y;
 	}
 	
 }

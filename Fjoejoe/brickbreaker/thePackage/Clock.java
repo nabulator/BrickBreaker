@@ -20,6 +20,7 @@ public class Clock
 		this.y = 50;
 
 		end = new Date(new Date().getTime() + 100000);
+
 		stopped = false;
 	}
 	

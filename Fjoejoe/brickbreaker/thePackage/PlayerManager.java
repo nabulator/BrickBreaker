@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import javax.swing.Timer;
 
 import processing.core.PApplet;
-import processing.core.PFont;
 
 /**
  * Keeps track of the number of points scored. Creates bricks in correct position 
@@ -28,6 +27,8 @@ public class PlayerManager
 	private int comboCount;
 	private Timer comboTimer;
 	private static boolean gameOver;
+	private String playerType;
+
 	/**
 	 * Creates a player that takes input by either UI or AI
 	 * @param parent the PApplet parent
@@ -37,12 +38,6 @@ public class PlayerManager
 	public PlayerManager(PApplet parent, String playerType, Rectangle boundary)
 	{
 		this.parent = parent;
-		/*if(playerType.equals("AI"))
-			paddle = new AIPaddle(playerNum * 25, playerNum * 25);
-		else if(playerType.equals("UI"))
-			paddle = new AIPaddle(playerNum * 25, playerNum * 25);
-		*/
-		//temp for paddle init
 		this.paddle = new Paddle(boundary);
 		this.bricks = new ArrayList<Brick>();
 		this.boundary = boundary;
@@ -59,6 +54,8 @@ public class PlayerManager
 		
 		for(int i=0; i<10; i++)
 			createBrick();
+		
+		this.playerType = playerType;
 		
 		score = 0;
 		comboCount = 0;
@@ -104,6 +101,16 @@ public class PlayerManager
 		bricks.add(b);
 	}
 	
+	public void moveAI()
+	{
+		if(paddle.getY() - ball.getY() > 30 && paddle.getY() - ball.getY() < 200)
+			if(paddle.getX() + (0.5 * Paddle.width) < ball.getX())
+				paddle.pushRight();
+			
+			else if(paddle.getX() + (0.5 * Paddle.width) > ball.getX())
+				paddle.pushLeft();
+	}
+	
 	/**
 	 * draws the objects of player manager
 	 */
@@ -120,6 +127,12 @@ public class PlayerManager
 		
 		
 		ball.draw(parent, this);
+
+		if(playerType.equals("AI") && Math.random() > 0.5)
+		{
+			moveAI();
+		}
+		
 		paddle.draw(parent);
 		wall.draw(parent);
 		
@@ -137,7 +150,7 @@ public class PlayerManager
 		parent.text(score, (float) boundary.getCenterX(), 600);
 		parent.text(comboCount, boundary.x + 60, boundary.y + 60);
 		parent.fill( 255 );
-		
+
 	}
 	
 	public void endGame()
