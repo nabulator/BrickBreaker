@@ -1,7 +1,11 @@
 package thePackage;
 
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.Timer;
 
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -17,9 +21,13 @@ public class PlayerManager
 	private PApplet parent;
 	private Paddle paddle;
 	private Ball ball;
+	private Wall wall;
 	private ArrayList<Brick> bricks;
 	private Rectangle boundary;
 	private int score;
+	private int comboCount;
+	private Timer comboTimer;
+	private static boolean gameOver;
 	/**
 	 * Creates a player that takes input by either UI or AI
 	 * @param parent the PApplet parent
@@ -38,14 +46,43 @@ public class PlayerManager
 		this.paddle = new Paddle(boundary);
 		this.bricks = new ArrayList<Brick>();
 		this.boundary = boundary;
-		this.ball = new Ball(boundary.x, boundary.y, bricks, paddle, null, boundary);
-
+		this.wall = new Wall(this.boundary);
+		this.ball = new Ball(paddle.getX(), paddle.getY() - paddle.height, bricks, paddle, wall, boundary);
+		
+		ActionListener comboListener = new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				comboTimeout();
+			}
+			
+		};
+		comboTimer = new Timer(1000, comboListener);
+		
 		for(int i=0; i<10; i++)
 			createBrick();
 		
 		score = 0;
+		comboCount = 0;
+		gameOver = false;
+		
 	}
 	
+	protected void comboTimeout() {
+		comboTimer.stop();
+		wall.moveDown(1, bricks);
+		comboCount = 0;
+	}
+	
+	protected void comboIncrease() {
+		if( comboTimer.isRunning() )
+			comboTimer.restart();
+		else
+			comboTimer.start();
+		
+		comboCount++;
+		
+		
+	}
+
 	/**
 	 * Returns a list of bricks in the game
 	 * @return List of bricks
@@ -61,7 +98,7 @@ public class PlayerManager
 	public void createBrick()
 	{
 		int xBrick = (int)(Math.random()*(boundary.width-32) + boundary.x);
-		int yBrick = (int)(Math.random()*boundary.height* 0.8 + boundary.y);
+		int yBrick = (int)(Math.random()* (boundary.height - wall.getHeight() ) + boundary.y + wall.getHeight());
 		
 		Brick b = new Brick(xBrick, yBrick);
 		bricks.add(b);
@@ -75,22 +112,39 @@ public class PlayerManager
 		for( Brick b: bricks )
 			b.draw(parent);
 		
-		if(bricks.size() < 10)
+		if(bricks.size() < 20)
 		{
 			createBrick();
-			score+= 50;
+			score += 50;
 		}
-		ball.draw(parent);
+		
+		
+		ball.draw(parent, this);
 		paddle.draw(parent);
+		wall.draw(parent);
+		
+		if(gameOver)
+		{
+			parent.fill(0, 122);
+			parent.rect(boundary.x, boundary.y, boundary.width, boundary.height);
+		}
 		
 		//Draw score
 		parent.fill( 255, 0, 255 );
 		//PFont taho = new PApplet().loadFont("Tahoma.ttf");
 		//parent.textFont(taho, 32);
+		parent.textSize(50);
 		parent.text(score, (float) boundary.getCenterX(), 600);
+		parent.text(comboCount, boundary.x + 60, boundary.y + 60);
 		parent.fill( 255 );
+		
 	}
 	
+	public void endGame()
+	{
+		gameOver = true;
+		ball.stop();
+	}
 	
 	public Paddle getPaddle()
 	{
