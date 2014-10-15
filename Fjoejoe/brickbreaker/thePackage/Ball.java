@@ -3,7 +3,12 @@ package thePackage;
 import java.awt.Rectangle;
 import java.awt.event.*;
 import java.util.ArrayList;
+
 import javax.swing.Timer;
+
+import ddf.minim.AudioPlayer;
+import ddf.minim.AudioSample;
+import ddf.minim.Minim;
 import processing.core.PApplet;
 
 /**
@@ -16,11 +21,13 @@ public class Ball
 	public static final float RADIUS = 10;
 	private float x, y;
 	private float dx, dy;
+	private Minim m;
 	private Rectangle boundary;
 	private Paddle paddle;
 	private ArrayList<Brick> bricks;
 	private Wall wall;
 	private Timer respawnTimer;
+	private static AudioSample fx1;
 	private static boolean isOver;
 
 	
@@ -33,7 +40,7 @@ public class Ball
 	 * @param wall a reference to the wall
 	 * @param dimensions the size of the screen
 	 */
-	public Ball(float x, float y, ArrayList<Brick> bricks, Paddle paddle, Wall wall, Rectangle dimensions)
+	public Ball(float x, float y, ArrayList<Brick> bricks, Paddle paddle, Wall wall, Rectangle dimensions, Minim m)
 	{
 		this.x = x;
 		this.y = y;
@@ -41,6 +48,7 @@ public class Ball
 		this.paddle = paddle;
 		this.bricks = bricks;
 		this.wall = wall;
+		this.m = m;
 		
 		dx = 9;
 		dy = 12;
@@ -53,6 +61,8 @@ public class Ball
 		respawnTimer = new Timer(2000, respawnListener);
 		isOver = false;
 		serveBall();
+		
+		fx1 = m.loadSample("BrickHit.wav");
 	}
 	
 	protected void serveBall() {
@@ -154,6 +164,9 @@ public class Ball
 		b.takeHit();
 		if( b.getHP() <= 0 )
 			bricks.remove(b);
+		
+		
+		fx1.trigger();
 	}
 	
 	public void stop()

@@ -7,7 +7,10 @@ import java.util.ArrayList;
 
 import javax.swing.Timer;
 
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import processing.core.PApplet;
+import processing.core.PFont;
 
 /**
  * Keeps track of the number of points scored. Creates bricks in correct position 
@@ -19,6 +22,7 @@ public class PlayerManager
 {
 	private PApplet parent;
 	private GameManager gm;
+	private Minim m;
 	private Paddle paddle;
 	private Ball ball;
 	private Wall wall;
@@ -37,16 +41,17 @@ public class PlayerManager
 	 * @param playerType the type of player
 	 * @param playerSide which half of the screen player is on
 	 */
-	public PlayerManager(PApplet parent, GameManager gm, String playerType, Rectangle boundary, int i)
+	public PlayerManager(PApplet parent, GameManager gm, Minim m, String playerType, Rectangle boundary, int i)
 	{
 		this.parent = parent;
 		this.gm = gm;
+		this.m = m;
 		this.paddle = new Paddle(boundary);
 		this.bricks = new ArrayList<Brick>();
 		this.boundary = boundary;
 		this.secretId = i;
 		this.wall = new Wall(this.boundary);
-		this.ball = new Ball(paddle.getX(), paddle.getY() - paddle.height, bricks, paddle, wall, boundary);
+		this.ball = new Ball(paddle.getX(), paddle.getY() - paddle.height, bricks, paddle, wall, boundary, m);
 		
 		ActionListener comboListener = new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -56,7 +61,7 @@ public class PlayerManager
 		};
 		comboTimer = new Timer(500, comboListener);
 		
-		for(int j=0; j<10; j++)
+		for(int j=0; j<20; j++)
 			createBrick();
 		
 		this.playerType = playerType;
@@ -120,6 +125,13 @@ public class PlayerManager
 	 */
 	public void draw()
 	{
+		//Draw score
+		//PFont taho = new PApplet().loadFont("Tahoma.ttf");
+		//parent.textFont(taho, 32);
+		parent.fill( 122, 122.0f );
+		parent.textSize(100);
+		parent.text(score, (float) boundary.getCenterX(), 400);
+		
 		for( Brick b: bricks )
 			b.draw(parent);
 		
@@ -145,15 +157,16 @@ public class PlayerManager
 			parent.rect(boundary.x, boundary.y, boundary.width, boundary.height);
 		}
 		
-		//Draw score
-		parent.fill( 255, 0, 255 );
-		//PFont taho = new PApplet().loadFont("Tahoma.ttf");
-		//parent.textFont(taho, 32);
-		parent.textSize(50);
-		parent.text(score, (float) boundary.getCenterX(), 600);
-		parent.text(comboCount, boundary.x + 60, boundary.y + 60);
+		parent.fill(0, 144, 244);
+		parent.textSize(20);
+		parent.text("Combo: " + comboCount, boundary.x + 100, boundary.y - 10);
 		parent.fill( 255 );
 
+	}
+	
+	public void exit()
+	{
+		m.stop();
 	}
 	
 	public void endGame()

@@ -19,13 +19,12 @@ public class BrickBreaker extends PApplet
 	{
 		size(960, 680);
 		m = new Minim(this);
-		mm = new MainMenu(this);
-		gm = new GameManager(this, "UI");
-		mode = 0;
-		//frameRate(10);
+		mm = new MainMenu(this, m);
+		gm = new GameManager(this, m, "UI");
 		
-		AudioPlayer song = m.loadFile("01 Adventure.mp3");
-		//song.play();
+		mode = 1;
+		//mm.startMusic();
+		
 	}
 	
 	/**
@@ -55,6 +54,8 @@ public class BrickBreaker extends PApplet
 	public void exit()
 	{
 		m.stop();
+		mm.exit();
+		gm.exit();
 	}
 
 	/**
@@ -103,17 +104,23 @@ public class BrickBreaker extends PApplet
 		this.mode = mode;
 		this.clear();
 		
+		mm.exit();
+		gm.exit();
+		
 		//change the mode
 		switch( mode )
 		{
 			case 0:
-				mm = new MainMenu(this);
+				mm.startMusic();
+				mm = new MainMenu(this, m);
 				break;
 			case 1:
-				gm = new GameManager(this, "AI");
+				gm = new GameManager(this, m, "AI");
+				gm.startMusic();
 				break;
 			case 2:
-				gm = new GameManager(this, "UI");
+				gm = new GameManager(this, m, "UI");
+				gm.startMusic();
 				break;
 			default:
 				throw new IllegalArgumentException("Invalid mode");

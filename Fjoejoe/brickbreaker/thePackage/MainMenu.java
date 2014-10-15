@@ -1,5 +1,7 @@
 package thePackage;
 
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import processing.core.PApplet;
 
 /**
@@ -11,16 +13,21 @@ import processing.core.PApplet;
 public class MainMenu
 {
 	private BrickBreaker parent;
+	private Minim audioParent;
+	private AudioPlayer song;
 	private Button p1, p2;
 	
 	/**
 	 * Initializes the main menu
 	 */
-	public MainMenu (BrickBreaker parent)
+	public MainMenu (BrickBreaker parent, Minim m)
 	{
 		this.parent = parent;
+		this.audioParent = m;
 		p1 = new Button(parent, 65, 450, "1 Player");
 		p2 = new Button(parent, 65, 500, "2 Player");
+		
+		song = m.loadFile("StreetFighterSelect.mp3");
 	}
 	
 	/**
@@ -46,6 +53,16 @@ public class MainMenu
 		if( p2.isPressed() )
 			parent.switchMode(2);
 		
+	}
+	
+	public void startMusic()
+	{
+		song.loop();
+	}
+	
+	public void exit()
+	{
+		audioParent.stop();
 	}
 	
 	public void mousePressed()

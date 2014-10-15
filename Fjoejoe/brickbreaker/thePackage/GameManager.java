@@ -2,6 +2,8 @@ package thePackage;
 
 import java.awt.Rectangle;
 
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import processing.core.PApplet;
 
 /**
@@ -12,11 +14,13 @@ import processing.core.PApplet;
 public class GameManager 
 {
 	private BrickBreaker parent;
+	private Minim m;
 	private PlayerManager p1, p2;
 	private Rectangle p1Bounds, p2Bounds;
 	private Clock timer;
 	private Button resetBtn;
 	private static boolean endGame;
+	private static AudioPlayer themeSong;
 	private boolean[] keysPressed;
 	
 	/**
@@ -24,15 +28,16 @@ public class GameManager
 	 * @param parent the PApplet parent
 	 * @param gameMode the type of game mode
 	 */
-	public GameManager(BrickBreaker parent, String gameMode)
+	public GameManager(BrickBreaker parent, Minim m, String gameMode)
 	{
 		this.parent = parent;
+		this.m = m;
 		
 		p1Bounds = new Rectangle(40, 40, 420, 600);
 		p2Bounds = new Rectangle(500, 40, 420, 600);
 		
-		p1 = new PlayerManager(parent, this, "UI", p1Bounds, 2);
-		p2 = new PlayerManager(parent, this, gameMode, p2Bounds, 1);
+		p1 = new PlayerManager(parent, this, m, "UI", p1Bounds, 2);
+		p2 = new PlayerManager(parent, this, m, gameMode, p2Bounds, 1);
 		timer = new Clock(parent, this);
 		resetBtn = new Button(parent, 480-105, 600, "Menu");
 
@@ -44,6 +49,9 @@ public class GameManager
 			keysPressed[i] = false;
 		
 		endGame = false;
+		
+		themeSong = m.loadFile("StreetFighterKen.mp3");
+		
 	}
 
 	/**
@@ -107,7 +115,6 @@ public class GameManager
 			{
 				case 37: keysPressed[2] = true; break;
 				case 39: keysPressed[3] = true; break;
-				
 			}
 		}
 	}
@@ -131,6 +138,18 @@ public class GameManager
 				case 39: keysPressed[3] = false; break;
 			}
 		}
+	}
+	
+	public void startMusic()
+	{
+		themeSong.play();
+	}
+	
+	public void exit()
+	{
+		m.stop();
+		p1.exit();
+		p2.exit();
 	}
 	
 	public void mousePressed()

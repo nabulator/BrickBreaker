@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * Draws the wall and controls the motion of the wall
@@ -32,6 +33,16 @@ public class Wall
 	{
 		parent.fill(23, 45, 34);
 		parent.rect(boundary.x, boundary.y, boundary.width, depth);
+		
+		/*PImage wood = parent.loadImage("wood.jpg");
+		parent.texture(wood);
+		parent.beginShape();
+		parent.vertex(boundary.x, boundary.y, 0, 0);
+		parent.vertex(boundary.x + boundary.width, boundary.y, 0, 100);
+		parent.vertex(boundary.x + boundary.width, boundary.y + depth, 100, 100);
+		parent.vertex(boundary.x, boundary.y + depth, 100, 0);
+		parent.endShape();*/
+	
 	}
 	
 	/**
