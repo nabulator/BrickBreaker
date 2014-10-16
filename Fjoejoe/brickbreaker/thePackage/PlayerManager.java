@@ -118,11 +118,17 @@ public class PlayerManager
 	
 	public void moveAI()
 	{
-		if(paddle.getY() - ball.getY() > 30 && paddle.getY() - ball.getY() < 200)
-			if(paddle.getX() + (0.5 * Paddle.width) < ball.getX())
+		float yDif = paddle.getY() - ball.getY();
+		float xDif = Math.abs(paddle.getX() - ball.getX());
+		
+		if( (ball.getY() < boundary.y + boundary.height) && 
+				((yDif > 15 && yDif < 100) || xDif > 80) &&
+				!(paddle.getX() < ball.getX() && paddle.getX() + Paddle.width > ball.getX()))
+			
+			if(paddle.getX() < ball.getX())
 				paddle.pushRight();
 			
-			else if(paddle.getX() + (0.5 * Paddle.width) > ball.getX())
+			else if(paddle.getX() > ball.getX())
 				paddle.pushLeft();
 	}
 	
