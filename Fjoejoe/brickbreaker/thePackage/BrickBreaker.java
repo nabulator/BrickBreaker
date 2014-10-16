@@ -22,7 +22,7 @@ public class BrickBreaker extends PApplet
 		mm = new MainMenu(this, m);
 		gm = new GameManager(this, m, "UI");
 		
-		mode = 1;
+		mode = 0;
 		//mm.startMusic();
 		
 	}
@@ -111,8 +111,8 @@ public class BrickBreaker extends PApplet
 		switch( mode )
 		{
 			case 0:
-				mm.startMusic();
 				mm = new MainMenu(this, m);
+				mm.startMusic();
 				break;
 			case 1:
 				gm = new GameManager(this, m, "AI");

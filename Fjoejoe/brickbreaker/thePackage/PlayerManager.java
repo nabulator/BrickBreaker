@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.Timer;
 
 import ddf.minim.AudioPlayer;
+import ddf.minim.AudioSample;
 import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -33,6 +34,7 @@ public class PlayerManager
 	private int secretId;
 	private Timer comboTimer;
 	private static boolean gameOver;
+	private static AudioSample fxWall;
 	private String playerType;
 
 	/**
@@ -60,6 +62,7 @@ public class PlayerManager
 			
 		};
 		comboTimer = new Timer(500, comboListener);
+		fxWall = m.loadSample("wallMove.wav");
 		
 		for(int j=0; j<20; j++)
 			createBrick();
@@ -75,7 +78,10 @@ public class PlayerManager
 	protected void comboTimeout() {
 		comboTimer.stop();
 		if(comboCount >= 4)
+		{
 			gm.getWall(secretId).moveDown(this, comboCount/4, bricks);
+			fxWall.trigger();
+		}
 		comboCount = 0;
 	}
 	
@@ -120,20 +126,23 @@ public class PlayerManager
 				paddle.pushLeft();
 	}
 	
+	private double c = Math.random() * 255;
 	/**
 	 * draws the objects of player manager
 	 */
 	public void draw()
 	{
+		c = (c + 0.05f) % 255;
+		parent.colorMode(parent.HSB);
+		parent.fill( (int) c, 122, 202 );
+		parent.rect(boundary.x, boundary.y, boundary.width, boundary.height);
+		parent.colorMode(parent.RGB);
 		//Draw score
 		//PFont taho = new PApplet().loadFont("Tahoma.ttf");
 		//parent.textFont(taho, 32);
-		parent.fill( 122, 122.0f );
+		parent.fill( 255, 122.0f );
 		parent.textSize(100);
 		parent.text(score, (float) boundary.getCenterX(), 400);
-		
-		for( Brick b: bricks )
-			b.draw(parent);
 		
 		if(bricks.size() < 20)
 		{
@@ -155,6 +164,8 @@ public class PlayerManager
 		{
 			parent.fill(0, 122);
 			parent.rect(boundary.x, boundary.y, boundary.width, boundary.height);
+			
+			//TODO print winner or loser
 		}
 		
 		parent.fill(0, 144, 244);

@@ -92,7 +92,10 @@ public class GameManager
 		timer.draw();
 		
 		if(endGame)
+		{
 			resetBtn.draw();
+		}
+			
 		if( resetBtn.isPressed() )
 			parent.switchMode(0);
 			

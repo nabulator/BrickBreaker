@@ -27,7 +27,7 @@ public class Ball
 	private ArrayList<Brick> bricks;
 	private Wall wall;
 	private Timer respawnTimer;
-	private static AudioSample fx1;
+	private static AudioSample fx1, fx2, fx3;
 	private static boolean isOver;
 
 	
@@ -62,15 +62,17 @@ public class Ball
 		isOver = false;
 		serveBall();
 		
-		fx1 = m.loadSample("BrickHit.wav");
+		fx1 = m.loadSample("brickHit.wav");
+		//fx2 = m.loadSample("bounce.wav");
+		fx3 = m.loadSample("die.wav");
 	}
 	
 	protected void serveBall() {
 		//reset position
-		x = (int) paddle.getX();
-		y = (int) (paddle.getY() - 10);
-		dy = -6;
-		dx = (int)(Math.random() * 8 - 4);
+		x = paddle.getX() + Paddle.width/2;
+		y = paddle.getY() - Paddle.height/2 - 1;
+		dy = -7;
+		dx = (int)(Math.random() * 10 - 5);
 		respawnTimer.stop();
 	}
 
@@ -81,8 +83,11 @@ public class Ball
 	{
 		if( x < boundary.x + RADIUS || x > boundary.x + boundary.width - RADIUS )
 			dx *= -1;
+
 		if( y < boundary.y + RADIUS )
 			dy *= -1;
+
+			
 		
 		//wall
 		if( y < wall.getBottom() + RADIUS )
@@ -104,9 +109,10 @@ public class Ball
 		if( x >= paddle.getX() && x <= paddle.getX() + Paddle.width
 				&& y > paddle.getY() - Ball.RADIUS && y < paddle.getY() + Ball.RADIUS + Paddle.height)
 		{
-			dy *= -1;
 			y = paddle.getY() - Paddle.height/2 - 1;
+			dy *= -1;
 			dx = 10 * ( x - paddle.getX() - Paddle.width/2 ) / Paddle.width;
+
 		}
 		
 		//ball collide on right
@@ -181,15 +187,28 @@ public class Ball
 	 */
 	public void draw(PApplet parent, PlayerManager pm)
 	{
+		//draw bricks
+		for( int i=bricks.size()-1; i>=0 ; i-- )
+		{
+			Brick b = bricks.get(i);
+			b.draw(parent);
+		}
+		
 		hitTest(pm);
 		parent.fill(234, 32, 56);
-		parent.noStroke();
+		parent.noStroke();			
 		
 		if( !respawnTimer.isRunning() )
 			parent.ellipse(x, y, RADIUS*2, RADIUS*2);
 		
 		if( !inBounds() )
+		{
 			respawnTimer.start();
+			x = paddle.getX() + Paddle.width/2;
+			y = paddle.getY() - Paddle.height/2 - 1;
+			fx3.trigger();
+		}
+			
 		
 		if( ! isOver )
 		{

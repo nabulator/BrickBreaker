@@ -1,5 +1,7 @@
 package thePackage;
 
+import java.awt.Rectangle;
+
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import processing.core.PApplet;
@@ -15,6 +17,7 @@ public class MainMenu
 	private BrickBreaker parent;
 	private Minim audioParent;
 	private AudioPlayer song;
+	private Demo d;
 	private Button p1, p2;
 	
 	/**
@@ -28,6 +31,7 @@ public class MainMenu
 		p2 = new Button(parent, 65, 500, "2 Player");
 		
 		song = m.loadFile("StreetFighterSelect.mp3");
+		d = new Demo( new Rectangle(350+105, 140, 400, 400));
 	}
 	
 	/**
@@ -41,11 +45,12 @@ public class MainMenu
 		parent.text("BrickBreaker", 170, 110);
 		p1.draw();
 		p2.draw();
+		d.draw(parent);
 		
 		//graphics
 		parent.stroke(100);
 		parent.strokeWeight(3);
-		parent.line(350, 60, 350, 580);
+		parent.line(350, 60, 350, 620);
 		
 		if( p1.isPressed() )
 			parent.switchMode(1);

@@ -31,7 +31,7 @@ public class Wall
 	 */
 	public void draw(PApplet parent)
 	{
-		parent.fill(23, 45, 34);
+		parent.fill(97, 54, 32);
 		parent.rect(boundary.x, boundary.y, boundary.width, depth);
 		
 		/*PImage wood = parent.loadImage("wood.jpg");
