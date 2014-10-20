@@ -16,7 +16,7 @@ public class Brick
 	public static Color[] palette = { new Color(0, 125, 255), 
 									  new Color(125, 0, 255) };
 	
-	private int hp;
+	private int hp; //hit points
 	
 	/**
 	 * Creates a brick
@@ -30,8 +30,7 @@ public class Brick
 	}
 	
 	/**
-	 * Causes damage to brick
-	 * Brick may disappear if health is 0
+	 * Checks to see if a point is hitting with ball
 	 * @oaram xP the hit point of x
 	 * @param xP the hit point of y
 	 */
@@ -50,7 +49,7 @@ public class Brick
 	}
 	
 	/**
-	 * hit the brick 
+	 * A brick takes damage
 	 */
 	public void takeHit()
 	{

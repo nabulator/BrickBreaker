@@ -148,6 +148,9 @@ public class GameManager
 		themeSong.play();
 	}
 	
+	/**
+	 * Cleans up the classes and music
+	 */
 	public void exit()
 	{
 		m.stop();

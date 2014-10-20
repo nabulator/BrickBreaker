@@ -8,9 +8,8 @@ import processing.core.PApplet;
 
 /**
  * Displays the user interface along with the game title. 
- * Plays game upon user's request and input
+ * Permits player to choose their game type
  * @author 60129
- *
  */
 public class MainMenu
 {

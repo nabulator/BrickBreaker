@@ -51,6 +51,9 @@ public class BrickBreaker extends PApplet
 		
 	}
 	
+	/**
+	 * Exits the game
+	 */
 	public void exit()
 	{
 		m.stop();
