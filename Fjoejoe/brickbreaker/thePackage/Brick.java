@@ -50,6 +50,7 @@ public class Brick
 	
 	/**
 	 * A brick takes damage
+	 * If bricks
 	 */
 	public void takeHit()
 	{
