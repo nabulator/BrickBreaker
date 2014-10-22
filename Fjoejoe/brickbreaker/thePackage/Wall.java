@@ -7,9 +7,8 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 /**
- * Draws the wall and controls the motion of the wall
+ * The wall is an extra boundary and moves down as the opponent increases their combo
  * @author 60129
- *
  */
 public class Wall
 {
@@ -32,21 +31,11 @@ public class Wall
 	public void draw(PApplet parent)
 	{
 		parent.fill(97, 54, 32);
-		parent.rect(boundary.x, boundary.y, boundary.width, depth);
-		
-		/*PImage wood = parent.loadImage("wood.jpg");
-		parent.texture(wood);
-		parent.beginShape();
-		parent.vertex(boundary.x, boundary.y, 0, 0);
-		parent.vertex(boundary.x + boundary.width, boundary.y, 0, 100);
-		parent.vertex(boundary.x + boundary.width, boundary.y + depth, 100, 100);
-		parent.vertex(boundary.x, boundary.y + depth, 100, 0);
-		parent.endShape();*/
-	
+		parent.rect(boundary.x, boundary.y, boundary.width, depth);	
 	}
 	
 	/**
-	 * Moves wall down
+	 * Moves wall down and removes the bricks that are out of bound
 	 * @param pm a reference to playermanager
 	 * @param brickLayers the degree it moves down
 	 * @param bricks the bricks
@@ -63,13 +52,12 @@ public class Wall
 			{
 				bricks.remove(i);
 				pm.createBrick();
-			}
-			
+			}	
 		}
 	}
 	
 	/**
-	 * Gets the bottom line fo the wall	
+	 * Gets the bottom line of the wall	
 	 * @return the location in y coordinate
 	 */
 	public int getBottom(){

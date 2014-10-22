@@ -83,8 +83,8 @@ public class Paddle
 	}
 	
 	/**
-	 * returns x coord
-	 * @return x coord
+	 * returns x coordinate
+	 * @return x coordinate
 	 */
 	public float getX()
 	{

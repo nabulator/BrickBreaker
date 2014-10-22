@@ -5,6 +5,11 @@ import java.util.ArrayList;
 
 import processing.core.PApplet;
 
+/**
+ * This class has no functional purpose. 
+ * Displays a cool sidescrolling game. 
+ * @author 167504
+ */
 public class Demo {
 	
 	private ArrayList<Circle> circs = new ArrayList<Circle>();
@@ -12,7 +17,7 @@ public class Demo {
 	private int count, radius;
 	
 	private int letterCnt;
-	public static String txt = "       Brickbreaker! A Game made by FJoe & Bran :)   Greetz to Mat Stave jesseParks Jer Lucy Depty Hady cheru eeshan a-nish  & everyone else! - coding in the morning is hard     ";
+	public final static String txt = "       Brickbreaker! A Game made by FJoe & Bran :)   Greetz to Matt Stave David Ryab Lucy Depty Hady Cheru Ishan Anish Anurag David Arthur Richard & everyone else! - coding in the morning is hard     ";
 	
 	public Demo(Rectangle b)
 	{
@@ -28,6 +33,7 @@ public class Demo {
 		//circs.add( new Circle( (int)(radius * Math.sin(i * Math.PI * 2 /count)) + bounds.x, (int)(radius * Math.cos(i * Math.PI * 2 / count)) + bounds.y, 20) );
 	}
 	
+	//These variables control independent sin() offsets.
 	private static int q = 0;
 	private static int t = 0;
 	private static int space = 50;

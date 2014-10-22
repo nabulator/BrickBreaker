@@ -4,6 +4,10 @@ import java.util.Date;
 
 import processing.core.PApplet;
 
+/**
+ * This class serves as the basic count down timer
+ * @author FJoe
+ */
 public class Clock
 {
 	private PApplet parent;
@@ -12,6 +16,11 @@ public class Clock
 	private boolean stopped;
 	private float x, y;
 	
+	/**
+	 * Constructs an instance of clock
+	 * @param parent the PApplet 
+	 * @param gm the GameManager
+	 */
 	public Clock(PApplet parent, GameManager gm)
 	{
 		this.parent = parent;
@@ -19,11 +28,15 @@ public class Clock
 		this.x = 450;
 		this.y = 50;
 
-		end = new Date(new Date().getTime() + 100000);
+		end = new Date(new Date().getTime() + 100000); //100 seconds
 
 		stopped = false;
 	}
 	
+	/**
+	 * Gets the amount of time left 
+	 * @return time left in SECONDS
+	 */
 	public int getTimeLeft()
 	{
 		int left = (int) (end.getTime() - new Date().getTime()) / 1000;

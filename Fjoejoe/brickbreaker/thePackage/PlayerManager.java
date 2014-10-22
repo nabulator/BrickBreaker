@@ -29,11 +29,11 @@ public class PlayerManager
 	private Wall wall;
 	private ArrayList<Brick> bricks;
 	private Rectangle boundary;
-	private int score;
-	private int comboCount;
-	private int secretId;
 	private Timer comboTimer;
+	
+	private int score, comboCount, secretId;
 	private static boolean gameOver;
+	
 	private static AudioSample fxWall;
 	private String playerType;
 
@@ -105,7 +105,7 @@ public class PlayerManager
 	}
 
 	/**
-	 * Constructs a brick onto the game
+	 * Initiates a single brick at a random position
 	 */
 	public void createBrick()
 	{
@@ -116,7 +116,10 @@ public class PlayerManager
 		bricks.add(b);
 	}
 	
-	public void moveAI()
+	/**
+	 * The artificial intelligence algorithm used
+	 */
+	private void moveAI()
 	{
 		float yDif = paddle.getY() - ball.getY();
 		float xDif = Math.abs(paddle.getX() - ball.getX());
@@ -132,15 +135,16 @@ public class PlayerManager
 				paddle.pushLeft();
 	}
 	
-	private double c = Math.random() * 255;
+	private double colorOffset = Math.random() * 255;
+	
 	/**
-	 * draws the objects of player manager
+	 * Draws the children of player manager
 	 */
 	public void draw()
 	{
-		c = (c + 0.05f) % 255;
+		colorOffset = (colorOffset + 0.05f) % 255;
 		parent.colorMode(parent.HSB);
-		parent.fill( (int) c, 122, 202 );
+		parent.fill( (int) colorOffset, 122, 202 );
 		parent.rect(boundary.x, boundary.y, boundary.width, boundary.height);
 		parent.colorMode(parent.RGB);
 		//Draw score

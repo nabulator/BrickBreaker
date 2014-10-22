@@ -175,6 +175,9 @@ public class Ball
 		fx1.trigger();
 	}
 	
+	/**
+	 * Freezes the ball's movement
+	 */
 	public void stop()
 	{	
 		isOver = true;
@@ -216,7 +219,7 @@ public class Ball
 			y += dy;
 		}
 	}
-
+	
 	private boolean inBounds() 
 	{
 		return this.y - RADIUS < boundary.y + boundary.height;
@@ -231,6 +234,10 @@ public class Ball
 		return x;
 	}
 	
+	/**
+	 * Returns y position of ball
+	 * @return y position of ball
+	 */
 	public float getY()
 	{
 		return y;
