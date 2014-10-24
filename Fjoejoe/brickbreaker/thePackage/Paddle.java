@@ -13,10 +13,10 @@ public class Paddle
 {
 	
 	private float x, y;
-	private float xVel; //x Velocity
+	private float xVel;
 	private float acceleration, friction;
 	private Rectangle bounds;
-	public static final int height = 20, width = 60;
+	public static final int HEIGHT = 20, WIDTH = 60;
 	
 	/**
 	 * Creates a paddle
@@ -26,7 +26,7 @@ public class Paddle
 	public Paddle (Rectangle bounds)
 	{
 		x = bounds.x + bounds.x/2;
-		y = bounds.y + bounds.height - Paddle.height;
+		y = bounds.y + bounds.height - Paddle.HEIGHT;
 		this.bounds = bounds;
 		
 		xVel = 0;
@@ -42,7 +42,7 @@ public class Paddle
 	{
 		parent.noStroke();
 		parent.fill( 255, 0, 0 );
-		parent.rect(x, y, width, height);
+		parent.rect(x, y, WIDTH, HEIGHT);
 		parent.fill( parent.color(255) );
 		
 		this.x += xVel;
@@ -55,12 +55,11 @@ public class Paddle
 			xVel *= -1.2;
 			x = bounds.x + 3;
 		}
-		else if (x + xVel > bounds.x + bounds.width- Paddle.width )
+		else if (x + xVel > bounds.x + bounds.width- Paddle.WIDTH )
 		{
 			xVel *= -1.2;
-			x = bounds.x + bounds.width - Paddle.width - 3;
+			x = bounds.x + bounds.width - Paddle.WIDTH - 3;
 		}
-			
 
 	}
 	

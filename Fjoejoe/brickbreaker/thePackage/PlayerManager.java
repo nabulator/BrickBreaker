@@ -23,19 +23,20 @@ public class PlayerManager
 {
 	private PApplet parent;
 	private GameManager gm;
-	private Minim m;
 	private Paddle paddle;
 	private Ball ball;
 	private Wall wall;
 	private ArrayList<Brick> bricks;
 	private Rectangle boundary;
 	private Timer comboTimer;
+	private String playerType;
 	
 	private int score, comboCount, secretId;
-	private static boolean gameOver;
+	private boolean gameOver;
 	
+	private Minim m;
 	private static AudioSample fxWall;
-	private String playerType;
+	
 
 	/**
 	 * Creates a player that takes input by either UI or AI
@@ -53,7 +54,7 @@ public class PlayerManager
 		this.boundary = boundary;
 		this.secretId = i;
 		this.wall = new Wall(this.boundary);
-		this.ball = new Ball(paddle.getX(), paddle.getY() - paddle.height, bricks, paddle, wall, boundary, m);
+		this.ball = new Ball(paddle.getX(), paddle.getY() - paddle.HEIGHT, bricks, paddle, wall, boundary, m);
 		
 		ActionListener comboListener = new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -92,7 +93,6 @@ public class PlayerManager
 			comboTimer.start();
 		
 		comboCount++;
-		
 	}
 
 	/**
@@ -122,10 +122,10 @@ public class PlayerManager
 	private void moveAI()
 	{
 		if(paddle.getY() - ball.getY() > 30 && paddle.getY() - ball.getY() < 200)
-			if(paddle.getX() + (0.5 * Paddle.width) < ball.getX())
+			if(paddle.getX() + (0.5 * Paddle.WIDTH) < ball.getX())
 				paddle.pushRight();
 			
-			else if(paddle.getX() + (0.5 * Paddle.width) > ball.getX())
+			else if(paddle.getX() + (0.5 * Paddle.WIDTH) > ball.getX())
 				paddle.pushLeft();
 	}
 	
@@ -141,9 +141,8 @@ public class PlayerManager
 		parent.fill( (int) colorOffset, 122, 202 );
 		parent.rect(boundary.x, boundary.y, boundary.width, boundary.height);
 		parent.colorMode(parent.RGB);
+		
 		//Draw score
-		//PFont taho = new PApplet().loadFont("Tahoma.ttf");
-		//parent.textFont(taho, 32);
 		parent.fill( 255, 122.0f );
 		parent.textSize(100);
 		parent.text(score, (float) boundary.getCenterX(), 400);
@@ -157,9 +156,7 @@ public class PlayerManager
 		ball.draw(parent, this);
 
 		if(playerType.equals("AI") && Math.random() > 0.5)
-		{
 			moveAI();
-		}
 		
 		paddle.draw(parent);
 		wall.draw(parent);

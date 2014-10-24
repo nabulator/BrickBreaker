@@ -25,7 +25,6 @@ public class Demo {
 		
 		count = 30;
 		radius = 100;
-		
 		letterCnt = 0;
 		
 		for(int i=0; i<count; i++)
