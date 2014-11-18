@@ -6,7 +6,7 @@ import java.awt.geom.*;
 import java.util.ArrayList;
 
 /**
- * MetaBall Effect
+ * MetaBall Effect .
  * @author 167504
  *
  */
