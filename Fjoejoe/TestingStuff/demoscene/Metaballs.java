@@ -5,6 +5,11 @@ import processing.core.PApplet;
 import java.awt.geom.*;
 import java.util.ArrayList;
 
+/**
+ * MetaBall Effect
+ * @author 167504
+ *
+ */
 public class Metaballs {
 	
 	private PApplet p;
