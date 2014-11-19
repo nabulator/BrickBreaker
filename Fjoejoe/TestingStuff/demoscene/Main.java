@@ -19,7 +19,7 @@ public class Main extends PApplet{
 		this.background(0);
 		
 		fx.draw();
-		System.out.println(frameRate);
+		//System.out.println(frameRate);
 	}
 	
 	public void exit()

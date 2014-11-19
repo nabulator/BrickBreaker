@@ -19,8 +19,8 @@ public class Circle {
 		
 		sx = Math.random() * 10 - 5;
 		sy = Math.random() * 10 - 5;
-		bx = Math.random() * 10 - 5;
-		by = Math.random() * 10 - 5 ;
+		bx = Math.random() * 0.1 - 0.05;
+		by = Math.random() * 0.1 - 0.05;
 		ax = Math.random() * 2 - 1;
 		ay = Math.random() * 2 - 1;
 	}
@@ -29,7 +29,7 @@ public class Circle {
 	{
 		this( 	(int)(Math.random() * p.width), 
 				(int)(Math.random() * p.height),
-				(int)(Math.random() * 5000) + 10 );
+				(int)(Math.random() * 2500) + 10 );
 	}
 	
 	private int vx = (int) (Math.random() * 20-10);
@@ -51,8 +51,8 @@ public class Circle {
 	{
 		this.x += (int)( sx * ( Math.sin(bx * t) + ax ) );
 		this.y += (int)( sy * ( Math.sin(by * t) + ay ) );
-		t++;
-		System.out.println(x + " " + y);
+		t++;		
+		//System.out.println(x + " " + y);
 	}
 
 }
