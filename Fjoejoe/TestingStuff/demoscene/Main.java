@@ -19,7 +19,11 @@ public class Main extends PApplet{
 		this.background(0);
 		
 		fx.draw();
+<<<<<<< HEAD
 		System.out.println(frameRate);
+=======
+		//System.out.println(frameRate);
+>>>>>>> branch 'briansbr' of https://github.com/nabulator/BrickBreaker.git
 	}
 	
 	public void exit()
