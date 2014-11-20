@@ -75,7 +75,7 @@ public class GameManager
 		else if (keysPressed[1])
 			p1.getPaddle().pushRight();
 		
-		if(keysPressed.length == 4)
+		if(keysPressed.length == 4) //2 player mode
 		{
 			if(keysPressed[2])
 				p2.getPaddle().pushLeft();
@@ -88,7 +88,6 @@ public class GameManager
 		
 		p1.draw();
 		p2.draw();		
-		
 		timer.draw();
 		
 		if(endGame)
@@ -170,6 +169,8 @@ public class GameManager
 	
 	/**
 	 * Precondition: i must be 1 or 2 and nothing 
+	 * This method returns a reference to one out of two walls.
+	 * This method is used to move the opponent's walls downwards
 	 * @param i the player number
 	 * @return a ref to wall
 	 */

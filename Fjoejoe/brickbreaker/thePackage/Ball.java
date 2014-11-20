@@ -69,8 +69,8 @@ public class Ball
 	
 	protected void serveBall() {
 		//reset position
-		x = paddle.getX() + Paddle.width/2;
-		y = paddle.getY() - Paddle.height/2 - 1;
+		x = paddle.getX() + Paddle.WIDTH/2;
+		y = paddle.getY() - Paddle.HEIGHT/2 - 1;
 		dy = -7;
 		dx = (int)(Math.random() * 10 - 5);
 		respawnTimer.stop();
@@ -106,12 +106,12 @@ public class Ball
 	private void paddleHitTest()
 	{	
 		//vertical collision
-		if( x >= paddle.getX() && x <= paddle.getX() + Paddle.width
-				&& y > paddle.getY() - Ball.RADIUS && y < paddle.getY() + Ball.RADIUS + Paddle.height)
+		if( x >= paddle.getX() && x <= paddle.getX() + Paddle.WIDTH
+				&& y > paddle.getY() - Ball.RADIUS && y < paddle.getY() + Ball.RADIUS + Paddle.HEIGHT)
 		{
-			y = paddle.getY() - Paddle.height/2 - 1;
+			y = paddle.getY() - Paddle.HEIGHT/2 - 1;
 			dy *= -1;
-			dx = 10 * ( x - paddle.getX() - Paddle.width/2 ) / Paddle.width;
+			dx = 10 * ( x - paddle.getX() - Paddle.WIDTH/2 ) / Paddle.WIDTH;
 
 		}
 		
@@ -207,8 +207,8 @@ public class Ball
 		if( !inBounds() )
 		{
 			respawnTimer.start();
-			x = paddle.getX() + Paddle.width/2;
-			y = paddle.getY() - Paddle.height/2 - 1;
+			x = paddle.getX() + Paddle.WIDTH/2;
+			y = paddle.getY() - Paddle.HEIGHT/2 - 1;
 			fx3.trigger();
 		}
 			

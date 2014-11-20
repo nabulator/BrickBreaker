@@ -23,7 +23,7 @@ public class BrickBreaker extends PApplet
 		gm = new GameManager(this, m, "UI");
 		
 		mode = 0;
-		mm.startMusic();
+		//mm.startMusic();
 		
 	}
 	
